@@ -1,0 +1,132 @@
+{
+  "request_id": "fictional-reading-demo-v1",
+  "expected_revision": 0,
+  "source": {
+    "label": "虚构演示：《雨天的旧书店》（非真实书目）",
+    "url": null,
+    "message_id": null
+  },
+  "nodes": [
+    {
+      "id": "fictional-book",
+      "title": "虚构小说《雨天的旧书店》",
+      "kind": "book",
+      "attribution": "user",
+      "status": "accepted",
+      "body": "这是为插件试用创作的虚构书目，不代表真实出版物。",
+      "quote": "我在读一篇虚构故事《雨天的旧书店》。",
+      "topics": [
+        "物品与记忆",
+        "翻译与理解"
+      ],
+      "quote_attribution": "user"
+    },
+    {
+      "id": "radio-family-analogy",
+      "title": "旧收音机，像一张家庭名片？",
+      "kind": "insight",
+      "attribution": "user",
+      "status": "open",
+      "body": "人物坚持带走旧收音机，也许承载家庭记忆，不一定说明它值钱。保留为探索中的类比。",
+      "quote": "那台旧收音机会不会像一张家庭名片，让人想起他曾经的生活？",
+      "topics": [
+        "物品与记忆"
+      ],
+      "quote_attribution": "user"
+    },
+    {
+      "id": "objects-memory",
+      "title": "物品与家庭记忆",
+      "kind": "concept",
+      "attribution": "ai",
+      "status": "proposed",
+      "body": "AI 提出：物品可能承载记忆和身份，解释仍需故事中的行为与描写支持。",
+      "topics": [
+        "物品与记忆"
+      ],
+      "quote": ""
+    },
+    {
+      "id": "four-layer-reading",
+      "title": "物品描写的四层观察",
+      "kind": "method",
+      "attribution": "ai",
+      "status": "accepted",
+      "body": "从物理、经济、社会、叙事四个角度观察物品。它是演示对话里的阅读方法，不是已有学术理论。",
+      "quote": "这个观察方法我想留着，之后读故事时试试。",
+      "topics": [
+        "阅读方法",
+        "物品与记忆"
+      ],
+      "quote_attribution": "user"
+    },
+    {
+      "id": "translation-title-question",
+      "title": "译名会改变故事的阅读预期吗？",
+      "kind": "question",
+      "attribution": "user",
+      "status": "open",
+      "body": "虚构读者对译名如何引导读者产生疑问，尚无确定结论。",
+      "quote": "如果把这篇故事译成另一个名字，会不会改变读者预期？",
+      "topics": [
+        "翻译与理解"
+      ],
+      "quote_attribution": "user"
+    },
+    {
+      "id": "objects-atmosphere",
+      "title": "旧物也可能只是在营造氛围",
+      "kind": "concept",
+      "attribution": "ai",
+      "status": "proposed",
+      "body": "AI 提出另一个解释：旧收音机也许只是在营造场景。保留为未采纳、未核验的可能性。",
+      "topics": [
+        "物品与记忆",
+        "阅读方法"
+      ],
+      "quote": ""
+    }
+  ],
+  "edges": [
+    {
+      "id": "origin-material",
+      "source": "radio-family-analogy",
+      "target": "fictional-book",
+      "relation": "origin",
+      "reason": "这个类比由虚构故事中的旧收音机场景引发。",
+      "attribution": "user"
+    },
+    {
+      "id": "identity-material",
+      "source": "radio-family-analogy",
+      "target": "objects-memory",
+      "relation": "extends",
+      "reason": "演示对话将物品与家庭记忆连接，或延伸为可复用的阅读方法。",
+      "attribution": "ai"
+    },
+    {
+      "id": "method-material",
+      "source": "radio-family-analogy",
+      "target": "four-layer-reading",
+      "relation": "extends",
+      "reason": "演示对话将物品与家庭记忆连接，或延伸为可复用的阅读方法。",
+      "attribution": "user"
+    },
+    {
+      "id": "translation-book",
+      "source": "translation-title-question",
+      "target": "fictional-book",
+      "relation": "origin",
+      "reason": "这个类比由虚构故事中的旧收音机场景引发。",
+      "attribution": "user"
+    },
+    {
+      "id": "boundary-material",
+      "source": "objects-atmosphere",
+      "target": "radio-family-analogy",
+      "relation": "challenges",
+      "reason": "加入营造氛围的可能性，给最初的记忆解释补充边界。",
+      "attribution": "ai"
+    }
+  ]
+}

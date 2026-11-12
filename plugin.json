@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "reading-between",
+  "version": "0.1.0",
+  "description": "Personal reading graph with provenance and revision history",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "阅读之间",
+        "shortDescription": "从阅读对话中积累思考、新知与关联",
+        "defaultPrompt": [
+          "打开我的知识地图",
+          "整理这次阅读讨论，主动关联已有思考"
+        ]
+      }
+    }
+  }
+}
