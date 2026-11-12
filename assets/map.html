@@ -1,100 +1,789 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>阅读之间</title><style>html,body{margin:0;padding:0}button{cursor:pointer}
-#reading-lab{--rs-bg:light-dark(#f8f7f1,#22271f);--rs-side:light-dark(#efeee5,#292f25);--rs-card:light-dark(#fdfcf7,#2f372b);--rs-ink:light-dark(#303d32,#e1e8d9);--rs-dim:light-dark(#6c7769,#abb7a3);--rs-rule:light-dark(#dcded1,#46513e);--rs-green:light-dark(#53664a,#b0c79a);--rs-tint:light-dark(#e4eadb,#3b4932);--rs-orange:light-dark(#955e3e,#dcb08c);--rs-new:light-dark(#f1e6d8,#44392b);color:var(--rs-ink);background:var(--rs-bg);font:14px/1.65 system-ui,sans-serif;color-scheme:light dark;border-radius:16px;overflow:hidden;border:1px solid var(--rs-rule)}
-#reading-lab *{box-sizing:border-box}#reading-lab [hidden]{display:none!important}#reading-lab button,#reading-lab textarea{font:inherit}#reading-lab button{color:inherit}#reading-lab button:focus-visible,#reading-lab a:focus-visible{outline:2px solid var(--rs-green);outline-offset:4px}#reading-lab button{touch-action:manipulation}#reading-lab .rs-top{padding:20px 24px;display:flex;gap:20px;align-items:center;border-bottom:1px solid var(--rs-rule);padding-right:110px}#reading-lab .rs-logo{font:500 24px/1.2 Georgia,'Songti SC',serif;letter-spacing:3px;white-space:nowrap}#reading-lab .rs-top-caption{color:var(--rs-dim);font-size:11px;letter-spacing:1px}#reading-lab .rs-shell{display:grid;grid-template-columns:154px minmax(0,1fr) 254px;min-height:640px}#reading-lab .rs-sidebar{background:var(--rs-side);padding:24px 13px;display:flex;flex-direction:column;border-right:1px solid var(--rs-rule)}#reading-lab .rs-kicker{color:var(--rs-dim);font-size:11px;letter-spacing:1.5px}#reading-lab .rs-sidebar .rs-kicker{padding:0 9px;margin-bottom:12px}#reading-lab .rs-topics{display:flex;flex-direction:column;gap:5px}#reading-lab .rs-topic{border:0;background:transparent;display:flex;align-items:center;gap:9px;text-align:left;padding:11px 9px;border-radius:8px;font-size:12px;min-height:44px}#reading-lab .rs-topic[aria-pressed=true]{background:var(--rs-tint);font-weight:500}#reading-lab .rs-seed{width:6px;height:6px;background:var(--rs-dim);border-radius:50%;flex:none}#reading-lab .rs-topic[aria-pressed=true] .rs-seed{background:var(--rs-green)}#reading-lab .rs-shelf{margin-top:36px;padding:0 9px}#reading-lab .rs-cover{background:var(--rs-ink);color:var(--rs-bg);padding:19px 9px 12px;width:86px;border-radius:2px 5px 5px 2px;font-family:Georgia,'Songti SC',serif;letter-spacing:3px;box-shadow:inset 5px 0 0 color-mix(in srgb,var(--rs-bg) 15%,transparent);font-size:14px;line-height:1.8;margin-bottom:12px}#reading-lab .rs-shelf p{font-size:11px;color:var(--rs-dim);margin:0}#reading-lab .rs-side-foot{margin-top:auto;padding:30px 9px 0;color:var(--rs-dim);font-size:11px}#reading-lab .rs-main{min-width:0;display:flex;flex-direction:column}#reading-lab .rs-main-head{padding:25px 25px 0}#reading-lab h2{font:400 24px/1.4 Georgia,'Songti SC',serif;margin:4px 0 5px}#reading-lab .rs-desc{font-size:12px;color:var(--rs-dim);margin:0}#reading-lab .rs-map{position:relative;height:423px;margin:5px 8px 0;background-image:radial-gradient(var(--rs-rule) .65px,transparent .65px);background-size:20px 20px;isolation:isolate}#reading-lab .rs-map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}#reading-lab .rs-map path{fill:none;stroke:var(--rs-rule);stroke-width:1.5}#reading-lab .rs-map path.rs-highlight{stroke:var(--rs-green)}#reading-lab .rs-map path.rs-fresh{stroke:var(--rs-orange);stroke-dasharray:4 4}#reading-lab .rs-node{position:absolute;transform:translate(-50%,-50%);background:var(--rs-bg);border:0;padding:9px 8px;width:132px;border-radius:10px;text-align:center;z-index:2;transition:opacity .2s,left .6s ease,top .6s ease;line-height:1.6}#reading-lab .rs-node small{display:block;color:var(--rs-dim);font-size:10px;letter-spacing:.8px;margin-bottom:4px}#reading-lab .rs-node .rs-marker{display:block;border:1px solid var(--rs-green);width:7px;height:7px;margin:0 auto 8px;border-radius:50%;background:var(--rs-bg)}#reading-lab .rs-node[aria-pressed=true] .rs-marker{background:var(--rs-green)}#reading-lab .rs-node[aria-pressed=true]:not(.rs-core){background:var(--rs-tint)}#reading-lab .rs-core{font:400 19px/1.6 Georgia,'Songti SC',serif;background:var(--rs-tint);width:218px;padding:20px 16px;border-radius:48% 44% 46% 42% / 39% 43% 41% 39%;box-shadow:0 0 0 9px color-mix(in srgb,var(--rs-tint) 26%,transparent)}#reading-lab .rs-core small{font:11px/1.6 system-ui,sans-serif;margin-bottom:8px}#reading-lab .rs-node.rs-fresh{color:var(--rs-orange);background:var(--rs-new)}#reading-lab .rs-edge{position:absolute;z-index:3;transform:translate(-50%,-50%);border:0;background:var(--rs-bg);padding:7px 4px;border-radius:6px;font-size:11px;color:var(--rs-dim);min-height:32px;white-space:nowrap}#reading-lab .rs-edge[aria-pressed=true]{color:var(--rs-green);background:var(--rs-tint)}#reading-lab .rs-update{margin:5px 22px 21px;padding:13px 15px;background:var(--rs-card);border:1px solid var(--rs-rule);border-radius:11px;display:flex;gap:14px;align-items:center;justify-content:space-between}#reading-lab .rs-update strong{font-weight:500;font-size:12px}#reading-lab .rs-update p{font-size:11px;color:var(--rs-dim);margin:3px 0 0}#reading-lab .rs-update button{border:0;background:var(--rs-tint);color:var(--rs-ink);padding:9px 11px;border-radius:8px;font-size:12px;white-space:nowrap;min-height:44px}#reading-lab .rs-info{border-left:1px solid var(--rs-rule);background:var(--rs-card);padding:26px 22px;min-width:0}#reading-lab .rs-info h3{font:400 22px/1.55 Georgia,'Songti SC',serif;margin:11px 0 17px}#reading-lab .rs-info p{font-size:12px;margin:9px 0;line-height:1.85}#reading-lab .rs-info blockquote{margin:16px 0 24px;border-left:2px solid var(--rs-rule);padding:0 0 0 12px;font:400 14px/1.9 Georgia,'Songti SC',serif;color:var(--rs-dim)}#reading-lab .rs-section{border-top:1px solid var(--rs-rule);padding-top:18px;margin-top:20px}#reading-lab .rs-related{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}#reading-lab .rs-related button{font-size:11px;border:1px solid var(--rs-rule);border-radius:6px;background:transparent;padding:7px 9px;min-height:34px}#reading-lab .rs-source{display:block;font-size:11px;color:var(--rs-dim);margin-top:24px;text-decoration:none}#reading-lab .rs-source:hover{text-decoration:underline}#reading-lab .rs-footer{display:flex;justify-content:space-between;gap:10px;padding:12px 23px;border-top:1px solid var(--rs-rule);font-size:11px;color:var(--rs-dim);flex-wrap:wrap}#reading-lab .rs-new-label{color:var(--rs-orange)}#reading-lab .rs-appear{animation:rs-bloom .65s ease both}@keyframes rs-bloom{from{transform:translate(-50%,-50%) scale(.8)}to{transform:translate(-50%,-50%) scale(1)}}
-@media(max-width:900px){#reading-lab .rs-shell{grid-template-columns:145px minmax(0,1fr)}#reading-lab .rs-info{grid-column:1/-1;border-left:0;border-top:1px solid var(--rs-rule);display:grid;grid-template-columns:1fr 1fr;gap:0 30px}#reading-lab .rs-info .rs-source{grid-column:1/-1}#reading-lab .rs-info .rs-section{margin-top:0;border-top:0;padding-top:0}#reading-lab .rs-map{height:440px}}
-@media(max-width:570px){#reading-lab .rs-top{padding:20px 16px;display:block}#reading-lab .rs-top-caption{margin-top:7px}#reading-lab .rs-shell{display:block}#reading-lab .rs-sidebar{padding:12px;border-right:0;border-bottom:1px solid var(--rs-rule)}#reading-lab .rs-sidebar>.rs-kicker,#reading-lab .rs-shelf,#reading-lab .rs-side-foot{display:none}#reading-lab .rs-topics{flex-direction:row;flex-wrap:wrap;gap:2px}#reading-lab .rs-topic{padding:9px 7px;font-size:11px;gap:5px;flex:1;justify-content:center}#reading-lab .rs-main-head{padding:20px 19px 0}#reading-lab h2{font-size:22px}#reading-lab .rs-node{width:116px;font-size:12px}#reading-lab .rs-core{width:218px;font-size:18px}#reading-lab .rs-map{margin:6px 2px 0}#reading-lab .rs-update{margin:8px 15px 19px;flex-wrap:wrap}#reading-lab .rs-info{display:block;padding:22px 20px}#reading-lab .rs-info .rs-section{border-top:1px solid var(--rs-rule);margin-top:20px;padding-top:18px}#reading-lab .rs-footer{padding:12px 17px}}
-@media(prefers-reduced-motion:reduce){#reading-lab *{animation:none!important;transition:none!important}}
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>阅读之间 · 知识地图</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #202722;
+      --sidebar: #252d29;
+      --panel: #2a332f;
+      --panel-raised: #303a34;
+      --ink: #eeeade;
+      --muted: #a6ada1;
+      --line: #59645a;
+      --grid: rgba(175, 184, 166, .14);
+      --blue: #83b7c6;
+      --yellow: #d8c34a;
+      --orange: #f08059;
+      --green: #8dbca4;
+      --radius: 22px;
+      font: 15px/1.6 Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      background: #151b18;
+      color: var(--ink);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 16px; min-width: 320px; background: #151b18; }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; cursor: pointer; touch-action: manipulation; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+    [hidden] { display: none !important; }
 
-#reading-lab{--rs-bg:light-dark(#e9e6de,#242724);--rs-side:light-dark(#dddad0,#2d302c);--rs-card:light-dark(#eeece5,#2c302c);--rs-ink:light-dark(#202622,#e7e7dc);--rs-dim:light-dark(#62685f,#b7baad);--rs-rule:light-dark(#b6b8aa,#646b5e);--rs-green:light-dark(#075b43,#77ba9c);--rs-tint:light-dark(#dadcd0,#414b3c);--rs-orange:light-dark(#c53e0b,#ef8b5b);--rs-new:light-dark(#ddd5c1,#494231);--rs-blue:light-dark(#254f66,#8bb7cc);--rs-yellow:light-dark(#b08b0d,#d1bb55);--rs-thought:light-dark(#ca430c,#c64a17);--rs-onthought:#f9eee0;border:1px solid var(--rs-rule);border-radius:24px 24px 16px 16px;box-shadow:inset 0 3px 0 color-mix(in srgb,var(--rs-card) 80%,transparent),0 6px 0 color-mix(in srgb,var(--rs-ink) 14%,transparent);font-family:'Arial',system-ui,sans-serif}
-#reading-lab .rs-top{min-height:88px;padding:23px 115px 20px 26px;gap:22px;border-bottom:1px solid var(--rs-ink);position:relative}
-#reading-lab .rs-logo{font:500 25px/1.1 'Arial',system-ui,sans-serif;letter-spacing:-1px;display:flex;align-items:center;gap:13px}
-#reading-lab .rs-logo::before{content:'';width:25px;height:25px;background:var(--rs-orange);border-radius:2px;box-shadow:inset 0 0 0 8px var(--rs-orange),inset 0 0 0 20px var(--rs-onthought)}
-#reading-lab .rs-top-caption,#reading-lab .rs-kicker,#reading-lab .rs-side-foot,#reading-lab .rs-footer{font-family:'Courier New',monospace;letter-spacing:.5px}
-#reading-lab .rs-top-caption{font-size:11px;line-height:1.5;max-width:180px}
-#reading-lab .rs-shell{grid-template-columns:148px minmax(0,1fr) 260px;min-height:650px}
-#reading-lab .rs-sidebar{border-right:1px solid var(--rs-rule);padding:23px 12px 16px}
-#reading-lab .rs-sidebar>.rs-kicker{font-size:11px;padding:0 3px;margin-bottom:16px;letter-spacing:0}
-#reading-lab .rs-topics{gap:0;border-top:1px solid var(--rs-rule)}
-#reading-lab .rs-topic{position:relative;flex-direction:column;justify-content:center;gap:12px;min-height:93px;font-size:12px;border-radius:0;border-bottom:1px solid var(--rs-rule);text-align:center}
-#reading-lab .rs-topic[aria-pressed=true]{background:var(--rs-card);box-shadow:inset 3px 0 0 var(--rs-orange)}
-#reading-lab .rs-seed{width:25px;height:25px;background:var(--rs-blue);border-radius:50%;box-shadow:inset 0 0 0 7px var(--rs-blue),inset 0 0 0 12px var(--rs-bg)}
-#reading-lab .rs-topic[aria-pressed=true] .rs-seed{background:var(--rs-blue)}
-#reading-lab .rs-topic[data-topic=translation] .rs-seed{border-radius:50% 50% 0 0;height:15px;box-shadow:0 9px 0 var(--rs-green);background:var(--rs-green);margin-bottom:9px}
-#reading-lab .rs-topic[data-topic=method] .rs-seed{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%);background:var(--rs-yellow);box-shadow:none}
-#reading-lab .rs-shelf{margin-top:25px;padding:0 5px}
-#reading-lab .rs-cover{color:var(--rs-ink);background:transparent;border:1px solid var(--rs-ink);border-left:5px solid var(--rs-ink);box-shadow:none;border-radius:0;padding:12px 7px;width:90px;font-family:inherit;letter-spacing:1px;font-size:13px}
-#reading-lab .rs-side-foot{font-size:10px;padding:24px 5px 0}
-#reading-lab .rs-main-head{padding:25px 25px 0}
-#reading-lab h2{font:400 24px/1.4 'Arial',system-ui,sans-serif;letter-spacing:-.6px;margin:7px 0}
-#reading-lab .rs-desc{font-size:12px}
-#reading-lab .rs-map{background-image:linear-gradient(to right,color-mix(in srgb,var(--rs-rule) 38%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in srgb,var(--rs-rule) 38%,transparent) 1px,transparent 1px);background-size:28px 28px;margin:12px 14px 0;border:1px solid var(--rs-rule);border-radius:21px;overflow:hidden}
-#reading-lab .rs-map::before,#reading-lab .rs-map::after{content:'';position:absolute;top:17px;bottom:17px;width:13px;background:repeating-linear-gradient(to bottom,var(--rs-dim) 0 1px,transparent 1px 10px);opacity:.65;z-index:0;pointer-events:none}
-#reading-lab .rs-map::before{left:0}#reading-lab .rs-map::after{right:0}
-#reading-lab .rs-map path{stroke:var(--rs-dim);stroke-width:1}
-#reading-lab .rs-map path.rs-highlight{stroke:var(--rs-blue);stroke-width:1.5}
-#reading-lab .rs-map path.rs-fresh{stroke:var(--rs-orange);stroke-dasharray:4 4}
-#reading-lab .rs-node{background:var(--rs-bg);font-size:13px;border-radius:0;width:132px;padding:10px 7px;line-height:1.45}
-#reading-lab .rs-node small{font-family:'Courier New',monospace;font-size:11px;letter-spacing:0;margin-bottom:5px}
-#reading-lab .rs-node .rs-marker{width:29px;height:29px;background:var(--rs-blue);border:0;box-shadow:inset 0 0 0 9px var(--rs-blue),inset 0 0 0 10px var(--rs-bg);border-radius:50%;margin-bottom:9px}
-#reading-lab .rs-node[data-kind=book] .rs-marker{background:var(--rs-green);clip-path:polygon(0 0,43% 0,50% 14%,57% 0,100% 0,100% 100%,57% 100%,50% 86%,43% 100%,0 100%);border-radius:0;box-shadow:none}
-#reading-lab .rs-node[data-kind=method] .rs-marker{background:var(--rs-yellow);clip-path:polygon(50% 0,100% 100%,0 100%);border-radius:0;box-shadow:none}
-#reading-lab .rs-node[aria-pressed=true]:not(.rs-core){background:var(--rs-card);outline:1px solid var(--rs-ink);outline-offset:0}
-#reading-lab .rs-node.rs-core{font:400 21px/1.5 'Arial',system-ui,sans-serif;background:var(--rs-thought);color:var(--rs-onthought);width:208px;padding:20px 12px;border-radius:3px;box-shadow:none;min-height:135px;display:flex;flex-direction:column;justify-content:center;letter-spacing:-.3px}
-#reading-lab .rs-core[data-kind=method]{background:var(--rs-yellow);color:var(--rs-ink)}
-#reading-lab .rs-core small{color:inherit;font:11px/1.5 'Courier New',monospace;opacity:.9;letter-spacing:0;margin-bottom:12px}
-#reading-lab .rs-node.rs-fresh{color:var(--rs-ink);background:var(--rs-new);border:1px solid var(--rs-orange)}
-#reading-lab .rs-node.rs-fresh .rs-marker{background:var(--rs-orange);box-shadow:none;width:25px;height:12px;border-radius:30px 30px 0 0}
-#reading-lab .rs-edge{font-family:'Courier New',monospace;background:var(--rs-bg);border-radius:0;color:var(--rs-dim);font-size:11px;padding:5px 3px}
-#reading-lab .rs-edge[aria-pressed=true]{color:var(--rs-blue);background:var(--rs-card);box-shadow:0 1px 0 var(--rs-blue)}
-#reading-lab .rs-update{margin:15px 14px 18px;border:1px solid var(--rs-rule);border-radius:3px;background:var(--rs-side);padding:13px 12px;gap:10px}
-#reading-lab .rs-update strong{font-weight:400;font-size:12px}
-#reading-lab .rs-update button{background:var(--rs-green);color:var(--rs-bg);border-radius:3px;padding:9px 12px;font-family:'Courier New',monospace;font-size:12px}
-#reading-lab .rs-info{background:var(--rs-card);padding:26px 21px;border-left:1px solid var(--rs-rule)}
-#reading-lab .rs-info h3{font:400 23px/1.4 'Arial',system-ui,sans-serif;letter-spacing:-.5px;margin:15px 0 20px}
-#reading-lab .rs-info blockquote{font:400 15px/1.9 'Arial',system-ui,sans-serif;border-left:0;padding:15px 0;margin:0 0 18px;border-top:1px solid var(--rs-rule);border-bottom:1px solid var(--rs-rule);color:var(--rs-ink)}
-#reading-lab .rs-info p{font-size:12px}
-#reading-lab .rs-section{margin-top:23px;padding-top:17px;border-top:1px solid var(--rs-ink)}
-#reading-lab .rs-related{display:block;margin-top:10px}
-#reading-lab .rs-related button{display:block;text-align:left;border:0;border-bottom:1px solid var(--rs-rule);border-radius:0;padding:10px 0;width:100%;font-size:12px;min-height:42px}
-#reading-lab .rs-source{font-family:'Courier New',monospace;font-size:11px}
-#reading-lab .rs-footer{border-top:1px solid var(--rs-ink);background:var(--rs-side);font-size:11px;padding:12px 21px}
-@media(max-width:900px){#reading-lab .rs-shell{grid-template-columns:132px minmax(0,1fr)}#reading-lab .rs-info{border-left:0;border-top:1px solid var(--rs-ink);grid-template-columns:1fr 1fr}#reading-lab .rs-info .rs-section{border:0;margin:0;padding:0}#reading-lab .rs-core{width:208px}}
-@media(max-width:570px){#reading-lab{border-radius:18px}#reading-lab .rs-top{padding:21px 105px 18px 18px;min-height:102px;display:block}#reading-lab .rs-logo{font-size:23px;gap:10px}#reading-lab .rs-top-caption{font-size:10px;margin-top:10px;max-width:none;letter-spacing:0}#reading-lab .rs-shell{display:block}#reading-lab .rs-sidebar{padding:0;border:0;border-bottom:1px solid var(--rs-ink)}#reading-lab .rs-topics{display:grid;grid-template-columns:repeat(3,1fr);border-top:0;gap:0}#reading-lab .rs-topic{flex-direction:row;min-height:65px;border-bottom:0;border-right:1px solid var(--rs-rule);padding:8px 4px;gap:8px;font-size:11px}#reading-lab .rs-topic:last-child{border-right:0}#reading-lab .rs-topic[aria-pressed=true]{box-shadow:inset 0 -3px 0 var(--rs-orange)}#reading-lab .rs-seed{width:18px;height:18px;box-shadow:inset 0 0 0 5px var(--rs-blue),inset 0 0 0 9px var(--rs-bg)}#reading-lab .rs-topic[data-topic=translation] .rs-seed{height:10px;box-shadow:0 6px 0 var(--rs-green);margin-bottom:6px}#reading-lab .rs-main-head{padding:20px 18px 0}#reading-lab h2{font-size:21px}#reading-lab .rs-map{margin:12px 8px 0;border-radius:16px}#reading-lab .rs-node{width:110px;font-size:12px}#reading-lab .rs-node.rs-core{width:208px;font-size:20px}#reading-lab .rs-update{margin:12px 8px 18px}#reading-lab .rs-info{padding:22px 18px;display:block}#reading-lab .rs-info .rs-section{margin-top:22px;padding-top:18px;border-top:1px solid var(--rs-ink)}#reading-lab .rs-footer{padding:11px 17px}}
+    #reading-lab {
+      max-width: 2040px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid #667064;
+      border-radius: 28px 28px 18px 18px;
+      background: var(--bg);
+      color: var(--ink);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, .24);
+    }
+    .rs-top {
+      min-height: 112px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 24px 42px;
+      border-bottom: 1px solid var(--line);
+      background: #252d29;
+    }
+    .rs-logo {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      white-space: nowrap;
+      font-size: clamp(24px, 2vw, 36px);
+      font-weight: 680;
+      letter-spacing: -.04em;
+    }
+    .rs-logo::before {
+      content: "";
+      width: 48px;
+      height: 48px;
+      border-radius: 5px;
+      background: var(--orange);
+      box-shadow: inset 0 0 0 13px var(--orange), inset 0 0 0 20px #fff0e5;
+    }
+    .rs-top-caption, .rs-kicker, .rs-side-foot, .rs-footer, .rs-demo-badge {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      letter-spacing: .09em;
+    }
+    .rs-top-caption { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .rs-demo-badge {
+      margin-left: auto;
+      color: var(--yellow);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .rs-shell {
+      display: grid;
+      grid-template-columns: clamp(190px, 15vw, 290px) minmax(0, 1fr) clamp(310px, 23vw, 440px);
+      min-height: min(1000px, calc(100vh - 145px));
+    }
+    .rs-sidebar {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 32px 26px 22px;
+      border-right: 1px solid var(--line);
+      background: var(--sidebar);
+    }
+    .rs-kicker { color: var(--muted); font-size: 13px; font-weight: 650; }
+    .rs-sidebar > .rs-kicker { margin: 0 0 22px 8px; }
+    .rs-topics { display: grid; gap: 7px; }
+    .rs-topic {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: transparent;
+      text-align: left;
+      font-size: 17px;
+      font-weight: 550;
+    }
+    .rs-topic[aria-pressed="true"] { border-color: var(--orange); background: #39443c; }
+    .rs-topic-dot { width: 18px; height: 18px; flex: 0 0 18px; border-radius: 50%; background: var(--topic-color, var(--blue)); }
+    .rs-shelf { margin-top: 22px; padding: 24px 8px 0; border-top: 1px solid var(--line); }
+    .rs-shelf-title { margin: 0 0 17px; color: var(--muted); font-size: 14px; }
+    .rs-books { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 17px 12px; }
+    .rs-book {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .rs-book[aria-pressed="true"] { color: var(--ink); }
+    .rs-cover {
+      position: relative;
+      width: 82px;
+      height: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 9px 12px 14px;
+      border-radius: 3px 6px 6px 3px;
+      background: var(--cover-color, var(--yellow));
+      box-shadow: inset 7px 0 0 rgba(255, 255, 255, .2), inset 12px 0 0 rgba(0, 0, 0, .12), 4px 5px 10px rgba(0, 0, 0, .22);
+      color: #202722;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: .04em;
+      transition: transform .2s ease, outline-color .2s ease;
+    }
+    .rs-book:hover .rs-cover, .rs-book[aria-pressed="true"] .rs-cover { transform: translateY(-3px); outline: 2px solid var(--orange); outline-offset: 3px; }
+    .rs-cover-title { max-height: 4.2em; overflow: hidden; }
+    .rs-book-meta { max-width: 90px; }
+    .rs-shelf-empty { color: var(--muted); font-size: 12px; }
+    .rs-side-foot { margin-top: auto; padding: 26px 8px 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+    .rs-main { min-width: 0; padding: 32px 28px 24px; }
+    .rs-map-card {
+      height: 100%;
+      min-height: 760px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      background-color: #202823;
+    }
+    .rs-main-head { padding: 29px 35px 0; }
+    .rs-main-head h1 { margin: 8px 0 5px; font-size: clamp(25px, 2.2vw, 38px); line-height: 1.3; font-weight: 650; letter-spacing: -.025em; }
+    .rs-desc { margin: 0; color: var(--muted); font-size: 16px; }
+    .rs-toolbar { min-height: 54px; display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+    .rs-toolbar button, .live-controls button {
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      font-size: 12px;
+    }
+    .rs-toolbar button:hover, .live-controls button:hover { border-color: var(--blue); background: var(--panel-raised); }
+    .rs-map {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 640px;
+      margin: 0 0 0;
+      overflow: hidden;
+      background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 38px 38px;
+      isolation: isolate;
+    }
+    .rs-map::before, .rs-map::after { content: ""; position: absolute; z-index: 0; top: 18px; bottom: 18px; width: 13px; opacity: .65; pointer-events: none; background: repeating-linear-gradient(to bottom, var(--muted) 0 1px, transparent 1px 10px); }
+    .rs-map::before { left: 0; }
+    .rs-map::after { right: 0; }
+    .rs-map svg { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .rs-map path { fill: none; stroke: #889184; stroke-width: 1.7; }
+    .rs-map path.rs-book-edge { stroke: var(--yellow); stroke-dasharray: 5 6; opacity: .5; }
+    .rs-node {
+      position: absolute;
+      z-index: 2;
+      width: clamp(150px, 18%, 225px);
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 4px;
+      background: rgba(32, 39, 34, .93);
+      text-align: center;
+      line-height: 1.45;
+      font-size: 17px;
+      font-weight: 590;
+      transition: opacity .18s ease, left .35s ease, top .35s ease, background .18s ease;
+    }
+    .rs-node:hover { background: var(--panel-raised); }
+    .rs-node small { color: var(--muted); font-size: 13px; font-weight: 500; }
+    .rs-node-mark { position: relative; width: 58px; height: 58px; display: block; border-radius: 50%; background: var(--blue); }
+    .rs-node-mark::after { content: ""; position: absolute; inset: 17px; border-radius: 50%; background: var(--bg); }
+    .rs-node[data-kind="method"] .rs-node-mark { width: 0; height: 0; border-radius: 0; border-left: 34px solid transparent; border-right: 34px solid transparent; border-bottom: 60px solid var(--yellow); background: transparent; }
+    .rs-node[data-kind="method"] .rs-node-mark::after { display: none; }
+    .rs-node[data-kind="insight"] .rs-node-mark { background: var(--green); }
+    .rs-node[data-kind="example"] .rs-node-mark { width: 48px; height: 48px; border-radius: 5px; background: var(--orange); }
+    .rs-node[data-kind="example"] .rs-node-mark::after { inset: 14px; border-radius: 2px; }
+    .rs-node[data-kind="book"] .rs-node-mark { width: 42px; height: 56px; border-radius: 3px; background: var(--yellow); }
+    .rs-node[data-kind="book"] .rs-node-mark::after { inset: 0 auto 0 8px; width: 5px; border-radius: 0; background: rgba(32, 39, 34, .2); }
+    .rs-node.rs-core {
+      width: clamp(250px, 31%, 360px);
+      min-height: 188px;
+      justify-content: center;
+      gap: 10px;
+      padding: 25px 28px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 14px;
+      background: var(--yellow);
+      color: #202722;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .16);
+      font-size: clamp(22px, 2vw, 31px);
+      font-weight: 720;
+    }
+    .rs-node.rs-core:hover { background: #e0ce5c; }
+    .rs-node.rs-core small { color: rgba(32, 39, 34, .76); }
+    .rs-node.rs-core .rs-node-mark { display: none; }
+    .rs-core-count { font-size: 14px; font-weight: 550; color: rgba(32, 39, 34, .78); }
+    .rs-edge {
+      position: absolute;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      min-height: 32px;
+      padding: 3px 8px;
+      border: 0;
+      border-radius: 4px;
+      background: #202823;
+      color: #c6cbbc;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .rs-edge:hover { color: var(--yellow); background: var(--panel-raised); }
+    .rs-update { display: flex; align-items: center; gap: 9px; padding: 12px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .rs-update-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .rs-list { padding: 24px; }
+    .rs-list button { display: block; width: 100%; padding: 14px 16px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; }
+    .rs-list small { display: block; margin-bottom: 5px; color: var(--muted); font-size: 11px; }
+    .rs-info {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      margin: 32px 28px 32px 4px;
+      padding: 34px 35px 25px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+    }
+    .rs-info h2 { margin: 17px 0 0; font-size: clamp(23px, 2vw, 34px); line-height: 1.4; font-weight: 650; letter-spacing: -.025em; }
+    .rs-type-pill { align-self: flex-start; margin-top: 19px; padding: 6px 14px; border-radius: 8px; background: #3b493c; color: var(--yellow); font-size: 13px; font-weight: 650; }
+    .rs-detail-block { margin-top: 23px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .rs-detail-label { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+    .rs-info blockquote { margin: 0; font-size: 17px; line-height: 1.85; font-weight: 580; }
+    .rs-quote-credit { margin-top: 10px; color: var(--muted); font-size: 11px; }
+    .rs-info .rs-summary { margin: 15px 0 0; color: #d5d8cb; font-size: 13px; line-height: 1.85; white-space: pre-line; }
+    .rs-source-card { display: flex; gap: 14px; align-items: center; margin: 8px 0; }
+    .rs-source-mini-cover { width: 40px; height: 56px; flex: 0 0 40px; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 2px; background: var(--yellow); color: #202722; text-align: center; font-size: 9px; line-height: 1.3; font-weight: 700; }
+    .rs-source-title { font-size: 15px; font-weight: 600; }
+    .rs-source-meta { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .rs-source-link { display: inline-block; margin-top: 6px; color: var(--blue); font-size: 11px; text-decoration: none; }
+    .rs-source-link:hover { text-decoration: underline; }
+    .rs-related { display: grid; gap: 5px; }
+    .rs-related button { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; border: 0; border-bottom: 1px solid rgba(89, 100, 90, .55); background: transparent; text-align: left; font-size: 13px; line-height: 1.55; }
+    .rs-related button:hover { color: var(--yellow); }
+    .rs-related-dot { width: 12px; height: 12px; flex: 0 0 12px; margin-top: 4px; border-radius: 50%; background: var(--blue); }
+    .rs-related-dot[data-kind="method"] { border-radius: 0; background: var(--yellow); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .rs-related-dot[data-kind="insight"] { background: var(--green); }
+    .rs-related-dot[data-kind="example"] { border-radius: 2px; background: var(--orange); }
+    .rs-related-relation { display: block; color: var(--muted); font-size: 10px; }
+    .rs-info-foot { margin-top: auto; padding-top: 28px; color: #899286; font: 11px/1.6 "SFMono-Regular", Consolas, monospace; letter-spacing: .06em; }
+    .live-controls { display: flex; gap: 7px; flex-wrap: wrap; margin: 14px 0 0; }
+    .rs-info input, .rs-info textarea { width: 100%; margin: 6px 0 12px; padding: 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--bg); color: var(--ink); font-size: 14px; }
+    .rs-info textarea { min-height: 140px; resize: vertical; }
+    .live-error { margin: 8px 20px; padding: 12px 14px; border: 1px solid var(--orange); color: #ffad8e; font-size: 12px; white-space: pre-wrap; }
+    .empty { padding: 50px 25px; color: var(--muted); text-align: center; }
+    .rs-footer { display: flex; justify-content: space-between; gap: 12px; padding: 11px 22px; border-top: 1px solid var(--line); background: #252d29; color: var(--muted); font-size: 10px; }
 
+    @media (max-width: 1280px) {
+      body { padding: 10px; }
+      .rs-top { min-height: 94px; padding: 20px 28px; }
+      .rs-shell { grid-template-columns: 175px minmax(0, 1fr) 300px; }
+      .rs-sidebar { padding: 26px 16px 18px; }
+      .rs-topic { min-height: 62px; padding: 10px 12px; font-size: 14px; }
+      .rs-main { padding: 22px 18px; }
+      .rs-map-card { min-height: 700px; }
+      .rs-main-head { padding: 23px 25px 0; }
+      .rs-info { margin: 22px 18px 22px 0; padding: 25px 22px 20px; }
+    }
+    @media (max-width: 980px) {
+      .rs-shell { grid-template-columns: 165px minmax(0, 1fr); }
+      .rs-info { grid-column: 1 / -1; margin: 0 18px 22px 183px; min-height: 400px; }
+      .rs-side-foot { padding-top: 12px; }
+      .rs-map-card { min-height: 700px; }
+    }
+    @media (max-width: 620px) {
+      body { padding: 0; }
+      #reading-lab { border-radius: 0; border-left: 0; border-right: 0; }
+      .rs-top { position: relative; min-height: 84px; gap: 12px; padding: 17px 18px; flex-wrap: wrap; }
+      .rs-logo { gap: 10px; font-size: 22px; }
+      .rs-logo::before { width: 30px; height: 30px; box-shadow: inset 0 0 0 8px var(--orange), inset 0 0 0 13px #fff0e5; }
+      .rs-top-caption { width: 100%; padding-left: 40px; font-size: 9px; }
+      .rs-demo-badge { position: absolute; right: 15px; top: 20px; font-size: 9px; }
+      .rs-shell { display: flex; flex-direction: column; }
+      .rs-sidebar { padding: 15px 13px 13px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .rs-sidebar > .rs-kicker { margin: 0 0 9px 5px; font-size: 10px; }
+      .rs-topics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+      .rs-topic { min-height: 44px; gap: 8px; padding: 8px; border-radius: 8px; font-size: 11px; }
+      .rs-topic-dot { width: 12px; height: 12px; flex-basis: 12px; }
+      .rs-shelf { margin-top: 13px; padding: 13px 5px 0; }
+      .rs-shelf-title { margin-bottom: 10px; font-size: 11px; }
+      .rs-books { grid-template-columns: repeat(auto-fill, 66px); gap: 10px; }
+      .rs-cover { width: 54px; height: 76px; font-size: 10px; }
+      .rs-book { font-size: 9px; }
+      .rs-book-meta { max-width: 64px; }
+      .rs-side-foot { display: none; }
+      .rs-main { padding: 13px 10px; }
+      .rs-map-card { min-height: 0; border-radius: 16px; }
+      .rs-main-head { padding: 17px 17px 0; }
+      .rs-kicker { font-size: 10px; }
+      .rs-main-head h1 { font-size: 22px; }
+      .rs-desc { font-size: 12px; }
+      .rs-toolbar { min-height: 40px; margin-top: 6px; }
+      .rs-toolbar button { min-height: 34px; padding: 5px 8px; font-size: 10px; }
+      .rs-map { min-height: 750px; background-size: 28px 28px; }
+      .rs-node { width: 132px; gap: 5px; padding: 6px 5px; font-size: 12px; }
+      .rs-node small { font-size: 10px; }
+      .rs-node-mark { width: 40px; height: 40px; }
+      .rs-node-mark::after { inset: 12px; }
+      .rs-node[data-kind="method"] .rs-node-mark { border-left-width: 23px; border-right-width: 23px; border-bottom-width: 41px; }
+      .rs-node.rs-core { width: 196px; min-height: 126px; padding: 15px 16px; border-radius: 11px; font-size: 19px; }
+      .rs-core-count { font-size: 11px; }
+      .rs-edge { min-height: 25px; padding: 2px 5px; font-size: 9px; }
+      .rs-update { padding: 9px 12px; font-size: 9px; }
+      .rs-info { margin: 0 10px 14px; padding: 22px 18px 17px; border-radius: 16px; }
+      .rs-info h2 { margin-top: 12px; font-size: 23px; }
+      .rs-type-pill { margin-top: 14px; font-size: 11px; }
+      .rs-detail-block { margin-top: 17px; padding-top: 16px; }
+      .rs-detail-label { font-size: 11px; }
+      .rs-info blockquote { font-size: 15px; }
+      .rs-info .rs-summary { font-size: 12px; }
+      .rs-footer { padding: 9px 12px; font-size: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div id="reading-lab">
+    <header class="rs-top">
+      <div class="rs-logo">阅读之间</div>
+      <div class="rs-top-caption">READING / THINKING / CONNECTIONS</div>
+      <div class="rs-demo-badge" id="demo-badge" hidden>FICTIONAL DEMO</div>
+    </header>
+    <div class="rs-shell">
+      <aside class="rs-sidebar" aria-label="主题与书架">
+        <div class="rs-kicker">主题 / CHANNELS</div>
+        <nav class="rs-topics" aria-label="知识主题"></nav>
+        <section class="rs-shelf" aria-label="书架">
+          <p class="rs-shelf-title">书架 / BOOKSHELF</p>
+          <div class="rs-books"></div>
+        </section>
+        <div class="rs-side-foot">PERSONAL ARCHIVE<br><span id="connection-state">正在连接知识库…</span></div>
+      </aside>
 
-#reading-lab .live-controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}#reading-lab .live-controls button{background:var(--rs-side);border:1px solid var(--rs-rule);padding:8px 10px;min-height:40px;border-radius:3px;font:12px system-ui;color:var(--rs-ink)}#reading-lab textarea,#reading-lab input{width:100%;box-sizing:border-box;background:var(--rs-bg);color:var(--rs-ink);border:1px solid var(--rs-rule);padding:9px;font:16px/1.6 system-ui;margin:5px 0 12px}#reading-lab textarea{min-height:150px;resize:vertical}#reading-lab .live-error{color:var(--rs-orange);font-size:12px;padding:12px 20px;white-space:pre-wrap}#reading-lab .live-list{padding:18px;display:grid;gap:8px}#reading-lab .live-list button{display:block;text-align:left;width:100%;padding:12px;background:var(--rs-bg);border:1px solid var(--rs-rule);font:14px system-ui;color:var(--rs-ink)}#reading-lab .live-list small{display:block;font-size:11px;color:var(--rs-dim);margin-bottom:6px}#reading-lab .rs-map .empty{padding:60px 25px;color:var(--rs-dim)}#reading-lab .rs-info .rs-section{margin-top:20px}#reading-lab .rs-node small{font-size:11px}#reading-lab .rs-node{line-height:1.5}#reading-lab .rs-node.rs-core{font-size:17px;min-height:120px}#reading-lab .rs-update{font-size:12px}#reading-lab .rs-sidebar{max-width:100%}
-</style></head><body><div id="reading-lab">
-<header class="rs-top"><div class="rs-logo">阅读之间</div><div class="rs-top-caption">READING / THINKING / CONNECTIONS</div></header>
-<div class="rs-shell"><aside class="rs-sidebar"><div class="rs-kicker">主题 / CHANNELS</div><nav class="rs-topics" aria-label="知识主题"></nav><div class="rs-side-foot">PERSONAL ARCHIVE<br><span id="connection-state">正在连接知识库…</span></div></aside>
-<main class="rs-main"><div class="rs-main-head"><div class="rs-kicker">知识地图 / CONNECTION MAP</div><h2 id="map-title">思考正在这里相遇</h2><p class="rs-desc" id="map-description">保留原话、来源，以及后来发生的变化。</p><div class="live-controls"><button id="view-toggle" type="button">节点列表</button><button id="refresh" type="button">刷新</button><button id="undo" type="button" hidden>撤销上次修改</button></div></div><div class="rs-map" aria-label="知识关系地图"><svg aria-hidden="true"></svg><div class="empty">等待连接。这里不会预填虚构的个人知识。</div></div><div class="live-list" hidden></div><div class="rs-update" aria-live="polite">暂无更新</div></main>
-<aside class="rs-info" aria-label="节点详情" aria-live="polite"><div class="rs-kicker">原话 / SOURCE</div><h3>从一次阅读对话开始</h3><p>在启用插件的对话里正常讨论，保存后就能在这里展开思考与关联。</p></aside></div>
-<div id="live-error" class="live-error" role="alert" hidden></div><div class="live-controls" style="padding:0 20px"><button id="retry" type="button" hidden>重试上次操作</button></div>
-<footer class="rs-footer"><span>NODE / 原话　 ·　 LINK / 关联依据</span><span id="revision-state">尚未连接存储</span></footer></div>
-<script>
-(function(){
-'use strict';
-const root=document.getElementById('reading-lab'),map=root.querySelector('.rs-map'),svg=map.querySelector('svg'),info=root.querySelector('.rs-info'),pending=new Map();let graph={nodes:[],edges:[],revision:-1,recent_changes:[]},focus=null,topic='',listMode=false,rpcId=0,ready=false,busy=false,pendingMutation=null;
-const labels={book:'作品',concept:'概念',insight:'你的思考',method:'方法',question:'开放问题',example:'具体例子'},relations={origin:'来自',analogy:'类比',supports:'支持',extends:'补充',challenges:'质疑',revises:'修正',example:'举例',applies:'应用',part_of:'组成'},authors={user:'你的表达',ai:'AI 解释',external:'外部知识'},states={open:'未定论',proposed:'待讨论',accepted:'你已认可',verified:'有外部核验来源'};
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function error(s){const e=root.querySelector('#live-error');e.textContent=s||'';e.hidden=!s;}
-function notify(method,params){window.parent.postMessage({jsonrpc:'2.0',method,params},'*');}
-function request(method,params){return new Promise((resolve,reject)=>{const id=++rpcId;const timer=setTimeout(()=>{pending.delete(id);reject(new Error('连接超时；写入结果可能尚未返回。请重试上次操作，不要重复创建。'));},15000);pending.set(id,{resolve,reject,timer});window.parent.postMessage({jsonrpc:'2.0',id,method,params},'*');});}
-window.addEventListener('message',event=>{if(event.source!==window.parent)return;const m=event.data;if(!m||m.jsonrpc!=='2.0')return;if(m.id!==undefined){const p=pending.get(m.id);if(!p)return;clearTimeout(p.timer);pending.delete(m.id);m.error?p.reject(new Error(m.error.message||'宿主调用失败')):p.resolve(m.result);}else if(m.method==='ui/notifications/tool-result'){receive(m.params);}});
-function receive(response){if(response?.isError)return;const content=response?.structuredContent;if(content?.graph&&Number.isInteger(content.graph.revision)&&content.graph.revision>=graph.revision){graph=content.graph;if(!graph.nodes.some(n=>n.id===focus))focus=graph.nodes.find(n=>n.kind==='insight')?.id||graph.nodes[0]?.id||null;render();}}
-async function call(name,args){if(!ready)throw new Error('知识库尚未连接。请从已连接的插件中打开地图。');const r=await request('tools/call',{name,arguments:args});if(r.isError){const e=new Error(r.content?.filter(c=>c.type==='text').map(c=>c.text).join(' ')||'操作失败');e.definitive=true;throw e;}receive(r);return r;}
-async function mutate(name,args,retry=false){if(busy)return;if(pendingMutation&&!retry){error('上次操作的结果尚未确认，请先重试上次操作。');return;}busy=true;error('');const op=pendingMutation||{name,args:{...args,request_id:crypto.randomUUID(),expected_revision:graph.revision}};pendingMutation=op;root.querySelector('#retry').hidden=true;try{await call(op.name,op.args);pendingMutation=null;}catch(e){error(e.message+(e.definitive?' 请刷新后检查内容再操作。':''));if(e.definitive)pendingMutation=null;root.querySelector('#retry').hidden=!pendingMutation;}finally{busy=false;}}
-function selected(){return graph.nodes.find(n=>n.id===focus);}
-function filtered(){return graph.nodes.filter(n=>!topic||(n.topics||[]).includes(topic));}
-function choose(id){focus=id;const n=selected();if(topic&&!(n?.topics||[]).includes(topic))topic='';render();}
-function detail(){const n=selected();if(!n){info.innerHTML='<div><div class="rs-kicker">原话 / SOURCE</div><h3>还没有选中的思考</h3><p>保存后，内容与来源会出现在这里。</p></div>';return;}const linked=graph.edges.filter(e=>e.source===focus||e.target===focus);info.innerHTML='<div><div class="rs-kicker">'+esc(authors[n.attribution])+' / '+esc(states[n.status])+'</div><h3>'+esc(n.title)+'</h3>'+(n.quote?'<blockquote>「'+esc(n.quote)+'」<small style="display:block;font:11px system-ui;margin-top:8px">'+esc(authors[n.quote_attribution||n.attribution])+'</small></blockquote>':'')+'<p>'+esc(n.body)+'</p><div class="live-controls"><button type="button" id="edit-node">编辑整理</button><button type="button" id="archive-node">移出地图</button></div></div><div class="rs-section"><div class="rs-kicker">关联 / CONNECTIONS</div><div class="rs-related">'+linked.map(e=>{const other=graph.nodes.find(x=>x.id===(e.source===focus?e.target:e.source));return other?'<button type="button" data-link="'+esc(e.id)+'">'+esc(relations[e.relation])+' · '+esc(other.title)+' ↗</button>':'';}).join('')+'</div><div class="rs-section"><div class="rs-kicker">来源 / PROVENANCE</div>'+n.sources.map(s=>'<p>'+esc(s.label)+'</p>'+(s.url?'<a class="rs-source" target="_blank" rel="noopener noreferrer" href="'+esc(s.url)+'">查看原对话或资料 ↗</a>':'')).join('')+'</div></div>';info.querySelector('#edit-node').onclick=edit;info.querySelector('#archive-node').onclick=()=>mutate('archive_reading_node',{node_id:n.id});info.querySelectorAll('[data-link]').forEach(b=>b.onclick=()=>edgeDetail(graph.edges.find(e=>e.id===b.dataset.link)));}
-function edgeDetail(e){if(!e)return;const a=graph.nodes.find(n=>n.id===e.source),b=graph.nodes.find(n=>n.id===e.target);info.innerHTML='<div><div class="rs-kicker">关联依据 / '+esc(relations[e.relation])+'</div><h3>'+esc(a?.title)+' → '+esc(b?.title)+'</h3><p>'+esc(e.reason)+'</p><p>'+esc(authors[e.attribution])+'</p></div><div class="rs-section"><div class="rs-kicker">沿着关联继续</div><div class="rs-related"><button data-to="'+esc(e.source)+'" type="button">'+esc(a?.title)+' ↗</button><button data-to="'+esc(e.target)+'" type="button">'+esc(b?.title)+' ↗</button></div></div>';info.querySelectorAll('[data-to]').forEach(el=>el.onclick=()=>choose(el.dataset.to));}
-function edit(){const n=selected();info.innerHTML='<form id="edit-form"><div class="rs-kicker">编辑整理 / EDIT</div><h3>原话与来源会保留</h3><label>标题<input name="title" maxlength="200" required></label><label>整理后的内容<textarea name="body" maxlength="12000" required></textarea></label><div class="live-controls"><button type="submit">保存</button><button id="cancel-edit" type="button">取消</button></div></form>';const f=info.querySelector('form');f.elements.title.value=n.title;f.elements.body.value=n.body;info.querySelector('#cancel-edit').onclick=detail;f.onsubmit=async e=>{e.preventDefault();await mutate('revise_reading_node',{node_id:n.id,title:f.elements.title.value,body:f.elements.body.value,status:n.status});};}
-function draw(){svg.innerHTML='';map.querySelectorAll('button,.empty').forEach(e=>e.remove());const n=selected();if(!n){const e=document.createElement('div');e.className='empty';e.textContent=ready?'这里还没有保存的思考。继续阅读讨论，地图会从第一条记录开始。':'请从插件中打开地图，以连接真实知识库。';map.appendChild(e);return;}
-const w=map.clientWidth,narrow=w<390;const neighbors=graph.edges.filter(e=>e.source===focus||e.target===focus).map(e=>e.source===focus?e.target:e.source);const ids=[focus,...Array.from(new Set(neighbors)).filter(id=>id!==focus).slice(0,6)];const count=ids.length-1;const height=narrow?Math.max(270,200+Math.ceil(count/2)*155):Math.max(330,count>4?545:430);map.style.height=height+'px';svg.setAttribute('viewBox','0 0 '+w+' '+height);const pos={[focus]:[w*.5,narrow?85:205]};const slots=narrow?[[.24,243],[.76,243],[.24,398],[.76,398],[.24,553],[.76,553]]:[[.22,65],[.78,65],[.22,355],[.78,355],[.22,495],[.78,495]];ids.slice(1).forEach((id,i)=>pos[id]=[w*slots[i][0],slots[i][1]]);const shownEdges=graph.edges.filter(e=>pos[e.source]&&pos[e.target]);for(const e of shownEdges){const a=pos[e.source],b=pos[e.target],my=(a[1]+b[1])/2;const path=document.createElementNS('http://www.w3.org/2000/svg','path');const i=ids.indexOf(e.source===focus?e.target:e.source)-1;const lower=narrow&&i>=2&&i<4&&(e.source===focus||e.target===focus);path.setAttribute('d',lower?'M '+pos[focus][0]+' '+pos[focus][1]+' L '+w*.5+' 285 Q '+w*.5+' 330 '+pos[ids[i+1]][0]+' '+pos[ids[i+1]][1]:'M '+a[0]+' '+a[1]+' C '+a[0]+' '+my+', '+b[0]+' '+my+', '+b[0]+' '+b[1]);svg.appendChild(path);const bt=document.createElement('button');bt.className='rs-edge';bt.type='button';bt.textContent=relations[e.relation];bt.setAttribute('aria-label','查看关联：'+bt.textContent);bt.style.left=(a[0]+b[0])/2+'px';bt.style.top=(lower?324:!narrow&&my<200?118:!narrow&&my<400?295:my)+'px';bt.onclick=()=>edgeDetail(e);map.appendChild(bt);}
-for(const id of ids){const item=graph.nodes.find(x=>x.id===id);if(!item)continue;const b=document.createElement('button');b.type='button';b.className='rs-node'+(id===focus?' rs-core':'');b.dataset.kind=item.kind==='book'?'book':item.kind==='method'?'method':item.kind==='insight'?'thought':'concept';b.setAttribute('aria-pressed',String(id===focus));b.innerHTML=(id===focus?'':'<span class="rs-marker" aria-hidden="true"></span>')+'<small>'+esc(labels[item.kind])+'</small>'+esc(item.title);b.style.left=pos[id][0]+'px';b.style.top=pos[id][1]+'px';b.onclick=()=>choose(id);map.appendChild(b);}}
-function render(){const topics=Array.from(new Set(graph.nodes.flatMap(n=>n.topics||[])));const nav=root.querySelector('.rs-topics');nav.innerHTML=['',...topics].map(t=>'<button class="rs-topic" type="button" data-topic="'+esc(t)+'" aria-pressed="'+String(t===topic)+'"><span class="rs-seed"></span>'+esc(t||'全部思考')+'</button>').join('');nav.querySelectorAll('button').forEach(b=>b.onclick=()=>{topic=b.dataset.topic;focus=filtered()[0]?.id||null;render();});root.querySelector('#map-title').textContent=selected()?.title||'思考正在这里相遇';root.querySelector('#map-description').textContent=topic||'以当前思考为中心，展开它的直接关联。';const list=root.querySelector('.live-list');list.hidden=!listMode;map.hidden=listMode;list.innerHTML=filtered().map(n=>'<button data-note="'+esc(n.id)+'" type="button"><small>'+esc(authors[n.attribution])+' / '+esc(states[n.status])+'</small>'+esc(n.title)+'</button>').join('');list.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>choose(b.dataset.note));root.querySelector('#revision-state').textContent='已读取存储 · 修订 '+graph.revision;root.querySelector('#connection-state').textContent=ready?'已连接':'快照';const last=graph.recent_changes[0];root.querySelector('.rs-update').textContent=last?'最近更新 / '+last.action+' · '+new Date(last.created_at).toLocaleString():'尚无更新记录';const undo=root.querySelector('#undo');undo.hidden=!last||last.action==='undo';draw();detail();}
-root.querySelector('#view-toggle').onclick=()=>{listMode=!listMode;root.querySelector('#view-toggle').textContent=listMode?'知识地图':'节点列表';render();};root.querySelector('#refresh').onclick=()=>call('get_knowledge_map',{}).catch(e=>error(e.message));root.querySelector('#undo').onclick=()=>{const last=graph.recent_changes[0];if(last)mutate('undo_reading_change',{change_id:last.id});};root.querySelector('#retry').onclick=()=>{if(pendingMutation)mutate(pendingMutation.name,pendingMutation.args,true);};new ResizeObserver(()=>{if(!listMode)draw();}).observe(map);
-(async()=>{if(window.parent===window){error('这是插件界面文件，需要在已连接的 ChatGPT 插件内打开。当前不会保存任何数据。');return;}try{await request('ui/initialize',{appInfo:{name:'reading-between',version:'0.1.0'},appCapabilities:{},protocolVersion:'2026-01-26'});ready=true;notify('ui/notifications/initialized',{});await call('get_knowledge_map',{});}catch(e){root.querySelector('#connection-state').textContent='未连接';error(e.message);}})();
-})();
-</script></body></html>
+      <main class="rs-main">
+        <section class="rs-map-card" aria-label="知识关系地图">
+          <div class="rs-main-head">
+            <div class="rs-kicker">知识地图 / CONNECTION MAP</div>
+            <h1 id="map-title">思考正在这里相遇</h1>
+            <p class="rs-desc" id="map-description">围绕一段阅读，留下可追溯的想法与关联。</p>
+            <div class="rs-toolbar live-controls">
+              <button id="view-toggle" type="button">节点列表</button>
+              <button id="refresh" type="button">刷新</button>
+              <button id="undo" type="button" hidden>撤销上次修改</button>
+            </div>
+          </div>
+          <div class="rs-map" aria-label="知识关系图">
+            <svg aria-hidden="true"></svg>
+            <div class="empty">等待连接知识库…</div>
+          </div>
+          <div class="rs-list" hidden></div>
+          <div class="rs-update" aria-live="polite"><span class="rs-update-dot"></span><span>等待连接知识库…</span></div>
+        </section>
+      </main>
+
+      <aside class="rs-info" aria-label="节点详情" aria-live="polite">
+        <div class="rs-kicker">节点详情 / DETAIL</div>
+        <div class="rs-type-pill">思考节点</div>
+        <h2>从一次阅读对话开始</h2>
+        <p class="rs-summary">在启用插件的对话里正常讨论，保存后就能在这里展开思考与关联。</p>
+      </aside>
+    </div>
+    <div id="live-error" class="live-error" role="alert" hidden></div>
+    <div class="live-controls" style="padding:0 20px 10px"><button id="retry" type="button" hidden>重试上次操作</button></div>
+    <footer class="rs-footer"><span>NODE / 原文与想法　 ·　 LINK / 关联依据</span><span id="revision-state">尚未连接存储</span></footer>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const DEMO_GRAPH = {
+      revision: 12,
+      recent_changes: [],
+      nodes: [
+        {
+          id: 'objects-memory', title: '物品与记忆', body: '旧物在故事里既承载日常功能，也保存人与过往之间的关系。读到物品时，可以继续追问：它属于谁、为何留下、作者为什么在此刻写到它？',
+          kind: 'concept', attribution: 'user', status: 'accepted', quote: '搬家时，坚持带走那台早已坏掉的收音机。', quote_attribution: 'external',
+          topics: ['文学阅读', '物品与记忆'], archived: false,
+          sources: [{ label: '《雨天的旧书店》· 第四章（虚构演示摘录）', url: null, message_id: 'demo-fictional-source', attribution: 'external', quote: '搬家时，坚持带走那台早已坏掉的收音机。', quote_attribution: 'external' }]
+        },
+        {
+          id: 'rainy-bookstore', title: '《雨天的旧书店》', body: '作者：沈禾（虚构）\n虚构演示作品 · 2024',
+          kind: 'book', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false,
+          sources: [{ label: '虚构演示书目', url: null, message_id: 'demo-fictional-book', attribution: 'external', quote: '', quote_attribution: 'external' }]
+        },
+        {
+          id: 'glass-sea-letters', title: '《玻璃海边的信》', body: '作者：周千屿（虚构）\n虚构演示作品 · 2023',
+          kind: 'book', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '阅读方法'], archived: false,
+          sources: [{ label: '虚构演示书目', url: null, message_id: 'demo-fictional-book-2', attribution: 'external', quote: '', quote_attribution: 'external' }]
+        },
+        {
+          id: 'radio-memory', title: '坏收音机承载家庭记忆', body: '人物坚持带走已经失去功能的收音机，说明它的价值来自共同生活的记忆。',
+          kind: 'insight', attribution: 'user', status: 'accepted', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false, sources: []
+        },
+        {
+          id: 'object-layers', title: '从物件细节理解人物关系', body: '先观察材质与使用痕迹，再看物品背后的资源、身份和生活方式，最后追问作者为何在此处呈现它。',
+          kind: 'method', attribution: 'user', status: 'accepted', quote: '', topics: ['文学阅读', '阅读方法'], archived: false, sources: []
+        },
+        {
+          id: 'why-keep', title: '人为什么会带走旧物？', body: '开放问题：留下物品是在保存记忆、维持身份，还是抵抗一段关系的结束？',
+          kind: 'question', attribution: 'user', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false, sources: []
+        },
+        {
+          id: 'moving-example', title: '搬家时带走那台收音机', body: '具体场景：主人公搬家时没有带走贵重家具，却坚持带走已坏掉的收音机。',
+          kind: 'example', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false, sources: []
+        },
+        {
+          id: 'letter-memory', title: '一封没有寄出的信', body: '信件在故事里成为无法当面说出的话的容器。',
+          kind: 'insight', attribution: 'user', status: 'proposed', quote: '', topics: ['文学阅读', '阅读方法'], archived: false, sources: []
+        }
+      ],
+      edges: [
+        { id: 'objects-radio', source: 'objects-memory', target: 'radio-memory', relation: 'extends', reason: '坏掉的收音机说明物品的意义会超出使用功能，成为共同生活的记忆载体。', attribution: 'user' },
+        { id: 'objects-layers', source: 'objects-memory', target: 'object-layers', relation: 'applies', reason: '这套阅读方法可以用来拆解物品如何提示人物关系。', attribution: 'user' },
+        { id: 'objects-question', source: 'objects-memory', target: 'why-keep', relation: 'origin', reason: '从“为什么坚持带走”这个细节继续追问人物动机。', attribution: 'user' },
+        { id: 'objects-example', source: 'objects-memory', target: 'moving-example', relation: 'example', reason: '小说中的搬家场景为这个思考提供了具体例子。', attribution: 'external' },
+        { id: 'book-objects', source: 'rainy-bookstore', target: 'objects-memory', relation: 'origin', reason: '这段思考来自虚构作品《雨天的旧书店》。', attribution: 'external' },
+        { id: 'book-radio', source: 'rainy-bookstore', target: 'radio-memory', relation: 'origin', reason: '收音机细节出现在《雨天的旧书店》第四章。', attribution: 'external' },
+        { id: 'book-letter', source: 'glass-sea-letters', target: 'letter-memory', relation: 'origin', reason: '这条演示思考来自虚构作品《玻璃海边的信》。', attribution: 'external' }
+      ]
+    };
+
+    const root = document.getElementById('reading-lab');
+    const map = root.querySelector('.rs-map');
+    const svg = map.querySelector('svg');
+    const info = root.querySelector('.rs-info');
+    const pending = new Map();
+    const standalone = window.parent === window;
+    const demoMode = standalone || new URLSearchParams(location.search).get('demo') === '1';
+    let graph = demoMode ? JSON.parse(JSON.stringify(DEMO_GRAPH)) : { nodes: [], edges: [], revision: -1, recent_changes: [] };
+    let focus = demoMode ? 'objects-memory' : null;
+    let topic = '';
+    let listMode = false;
+    let rpcId = 0;
+    let ready = false;
+    let busy = false;
+    let pendingMutation = null;
+
+    const labels = { book: '书籍', concept: '核心概念', insight: '洞察', method: '方法', question: '开放问题', example: '具体例子' };
+    const relations = { origin: '来源', analogy: '类比', supports: '支持', extends: '延伸', challenges: '质疑', revises: '修正', example: '具体例子', applies: '应用', part_of: '组成' };
+    const authors = { user: '你的表达', ai: 'AI 整理', external: '书籍原文' };
+    const states = { open: '开放中', proposed: '待讨论', accepted: '已认可', verified: '外部核验' };
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+    const allNodes = () => graph.nodes.filter(node => !node.archived);
+    const nodeById = id => graph.nodes.find(node => node.id === id && !node.archived);
+    const selected = () => nodeById(focus);
+    const edgesFor = id => graph.edges.filter(edge => edge.source === id || edge.target === id);
+    const relatedNode = edge => nodeById(edge.source === focus ? edge.target : edge.source);
+    const filtered = () => allNodes().filter(node => node.kind !== 'book' && (!topic || (node.topics || []).includes(topic)));
+
+    function error(message) {
+      const element = root.querySelector('#live-error');
+      element.textContent = message || '';
+      element.hidden = !message;
+    }
+    function notify(method, params) { window.parent.postMessage({ jsonrpc: '2.0', method, params }, '*'); }
+    function request(method, params) {
+      return new Promise((resolve, reject) => {
+        const id = ++rpcId;
+        const timer = setTimeout(() => {
+          pending.delete(id);
+          reject(new Error('连接超时；写入结果可能尚未返回。请重试上次操作，不要重复创建。'));
+        }, 15000);
+        pending.set(id, { resolve, reject, timer });
+        window.parent.postMessage({ jsonrpc: '2.0', id, method, params }, '*');
+      });
+    }
+    window.addEventListener('message', event => {
+      if (event.source !== window.parent) return;
+      const message = event.data;
+      if (!message || message.jsonrpc !== '2.0') return;
+      if (message.id !== undefined) {
+        const item = pending.get(message.id);
+        if (!item) return;
+        clearTimeout(item.timer);
+        pending.delete(message.id);
+        message.error ? item.reject(new Error(message.error.message || '宿主调用失败')) : item.resolve(message.result);
+      } else if (message.method === 'ui/notifications/tool-result') receive(message.params);
+    });
+    function receive(response) {
+      if (response?.isError) return;
+      const content = response?.structuredContent;
+      if (content?.graph && Number.isInteger(content.graph.revision) && content.graph.revision >= graph.revision) {
+        graph = content.graph;
+        if (!nodeById(focus)) focus = allNodes().find(node => node.kind === 'insight')?.id || allNodes()[0]?.id || null;
+        render();
+      }
+    }
+    async function call(name, args) {
+      if (!ready) throw new Error('知识库尚未连接。请从已连接的插件中打开地图。');
+      const response = await request('tools/call', { name, arguments: args });
+      if (response.isError) {
+        const issue = new Error(response.content?.filter(item => item.type === 'text').map(item => item.text).join(' ') || '操作失败');
+        issue.definitive = true;
+        throw issue;
+      }
+      receive(response);
+      return response;
+    }
+    async function mutate(name, args, retry = false) {
+      if (demoMode || busy) return;
+      if (pendingMutation && !retry) { error('上次操作的结果尚未确认，请先重试上次操作。'); return; }
+      busy = true;
+      error('');
+      const operation = pendingMutation || { name, args: { ...args, request_id: crypto.randomUUID(), expected_revision: graph.revision } };
+      pendingMutation = operation;
+      root.querySelector('#retry').hidden = true;
+      try {
+        await call(operation.name, operation.args);
+        pendingMutation = null;
+      } catch (issue) {
+        error(issue.message + (issue.definitive ? ' 请刷新后检查内容再操作。' : ''));
+        if (issue.definitive) pendingMutation = null;
+        root.querySelector('#retry').hidden = !pendingMutation;
+      } finally { busy = false; }
+    }
+
+    function booksFor(node) {
+      if (!node) return [];
+      const ids = new Set();
+      for (const edge of graph.edges) {
+        if (edge.relation !== 'origin') continue;
+        const bookId = nodeById(edge.source)?.kind === 'book' && edge.target === node.id ? edge.source : nodeById(edge.target)?.kind === 'book' && edge.source === node.id ? edge.target : null;
+        if (bookId) ids.add(bookId);
+      }
+      for (const book of allNodes().filter(item => item.kind === 'book')) {
+        if ((node.sources || []).some(source => source.label?.includes(book.title.replace(/[《》]/g, '')) || source.label?.includes(book.title))) ids.add(book.id);
+      }
+      return [...ids].map(nodeById).filter(Boolean);
+    }
+    function bookMeta(book) {
+      return String(book?.body || '').split('\n').map(line => line.trim()).filter(Boolean).join(' · ');
+    }
+    function sourceLabel(source) { return source?.label || '阅读来源'; }
+
+    function renderTopics() {
+      const topics = [...new Set(allNodes().filter(node => node.kind !== 'book').flatMap(node => node.topics || []))];
+      const colors = ['var(--blue)', 'var(--yellow)', 'var(--green)', 'var(--orange)'];
+      const nav = root.querySelector('.rs-topics');
+      nav.innerHTML = ['', ...topics].map((item, index) => {
+        const label = item || '全部思考';
+        return `<button class="rs-topic" type="button" data-topic="${esc(item)}" aria-pressed="${String(item === topic)}" style="--topic-color:${colors[index % colors.length]}"><span class="rs-topic-dot" aria-hidden="true"></span><span>${esc(label)}</span></button>`;
+      }).join('');
+      nav.querySelectorAll('[data-topic]').forEach(button => button.addEventListener('click', () => {
+        topic = button.dataset.topic;
+        focus = filtered()[0]?.id || null;
+        render();
+      }));
+    }
+    function renderShelf() {
+      const books = allNodes().filter(node => node.kind === 'book');
+      const shelf = root.querySelector('.rs-books');
+      if (!books.length) {
+        shelf.innerHTML = '<p class="rs-shelf-empty">书籍节点会出现在这里。</p>';
+        return;
+      }
+      const colors = ['#d8c34a', '#83b7c6', '#db9069', '#8dbca4'];
+      shelf.innerHTML = books.map((book, index) => {
+        const coverTitle = book.title.replace(/^《|》$/g, '');
+        const active = booksFor(selected()).some(item => item.id === book.id) || selected()?.id === book.id;
+        return `<button type="button" class="rs-book" data-book="${esc(book.id)}" aria-pressed="${String(active)}" aria-label="打开书籍来源：${esc(book.title)}"><span class="rs-cover" style="--cover-color:${colors[index % colors.length]}"><span class="rs-cover-title">${esc(coverTitle)}</span></span><span class="rs-book-meta">${esc(book.title)}</span></button>`;
+      }).join('');
+      shelf.querySelectorAll('[data-book]').forEach(button => button.addEventListener('click', () => choose(button.dataset.book)));
+    }
+    function choose(id) {
+      focus = id;
+      const node = selected();
+      if (topic && node && node.kind !== 'book' && !(node.topics || []).includes(topic)) topic = '';
+      render();
+    }
+
+    function detail() {
+      const node = selected();
+      if (!node) {
+        info.innerHTML = '<div class="rs-kicker">节点详情 / DETAIL</div><div class="rs-type-pill">等待记录</div><h2>思考会在这里相遇</h2><p class="rs-summary">在启用插件的对话里正常讨论。保存后，原文、书籍来源和相关节点会出现在这里。</p>';
+        return;
+      }
+      const linked = edgesFor(node.id).map(edge => ({ edge, other: nodeById(edge.source === node.id ? edge.target : edge.source) })).filter(item => item.other && item.other.kind !== 'book');
+      const books = booksFor(node);
+      const sources = node.sources || [];
+      const isCore = linked.length > 2;
+      const quote = node.quote ? `<section class="rs-detail-block"><p class="rs-detail-label">原文摘录 / ORIGINAL EXCERPT</p><blockquote>“${esc(node.quote)}”</blockquote><div class="rs-quote-credit">${esc(authors[node.quote_attribution || node.attribution] || '来源未标注')}</div></section>` : '';
+      const summary = node.body ? `<p class="rs-summary">${esc(node.body)}</p>` : '';
+      const bookCards = books.map(book => {
+        const source = sources.find(item => item.label?.includes(book.title.replace(/[《》]/g, '')) || item.label?.includes(book.title));
+        return `<div class="rs-source-card"><div class="rs-source-mini-cover">${esc(book.title.replace(/^《|》$/g, ''))}</div><div><div class="rs-source-title">${esc(book.title)}</div><div class="rs-source-meta">${esc(bookMeta(book) || sourceLabel(source) || '书籍来源')}</div>${source?.url ? `<a class="rs-source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">查看来源 ↗</a>` : ''}</div></div>`;
+      }).join('');
+      const sourceFallback = sources.length ? sources.map(source => `<p class="rs-source-meta">${esc(sourceLabel(source))}${source.attribution ? ` · ${esc(authors[source.attribution] || source.attribution)}` : ''}</p>${source.url ? `<a class="rs-source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">查看原对话或资料 ↗</a>` : ''}`).join('') : '<p class="rs-source-meta">这条节点还没有记录书籍来源。</p>';
+      const related = linked.length ? linked.map(({ edge, other }) => `<button type="button" data-to="${esc(other.id)}"><span class="rs-related-dot" data-kind="${esc(other.kind)}" aria-hidden="true"></span><span><span class="rs-related-relation">${esc(relations[edge.relation] || '关联')}</span>${esc(other.title)}</span></button>`).join('') : '<p class="rs-source-meta">暂时没有直接关联的节点。</p>';
+      const editControls = ready && !demoMode ? '<div class="live-controls"><button type="button" id="edit-node">编辑整理</button><button type="button" id="archive-node">移出地图</button></div>' : '';
+      info.innerHTML = `<div class="rs-kicker">节点详情 / DETAIL</div><div class="rs-type-pill">${esc(labels[node.kind] || '思考节点')}</div><h2>${esc(node.title)}</h2>${quote}${books.length || sources.length ? `<section class="rs-detail-block"><p class="rs-detail-label">书籍来源 / BOOK SOURCE</p>${books.length ? bookCards : sourceFallback}</section>` : ''}${summary}${editControls}<section class="rs-detail-block"><p class="rs-detail-label">相关节点 / RELATED NODES</p><div class="rs-related">${related}</div></section><div class="rs-info-foot">${demoMode ? 'FICTIONAL DATA · UI CONCEPT' : `${esc(authors[node.attribution] || '来源未标注')} · ${esc(states[node.status] || '状态未标注')}`}</div>`;
+      info.querySelectorAll('[data-to]').forEach(button => button.addEventListener('click', () => choose(button.dataset.to)));
+      if (ready && !demoMode) {
+        info.querySelector('#edit-node')?.addEventListener('click', edit);
+        info.querySelector('#archive-node')?.addEventListener('click', () => mutate('archive_reading_node', { node_id: node.id }));
+      }
+    }
+    function edgeDetail(edge) {
+      if (!edge) return;
+      const start = nodeById(edge.source), end = nodeById(edge.target);
+      info.innerHTML = `<div class="rs-kicker">关联依据 / ${esc(relations[edge.relation] || '关联')}</div><div class="rs-type-pill">${esc(relations[edge.relation] || '关联')}</div><h2>${esc(start?.title)} → ${esc(end?.title)}</h2><p class="rs-summary">${esc(edge.reason)}</p><section class="rs-detail-block"><p class="rs-detail-label">沿着关联继续 / KEEP READING</p><div class="rs-related"><button type="button" data-to="${esc(edge.source)}">${esc(start?.title)} ↗</button><button type="button" data-to="${esc(edge.target)}">${esc(end?.title)} ↗</button></div></section><div class="rs-info-foot">${demoMode ? 'FICTIONAL DATA · UI CONCEPT' : esc(authors[edge.attribution] || '来源未标注')}</div>`;
+      info.querySelectorAll('[data-to]').forEach(button => button.addEventListener('click', () => choose(button.dataset.to)));
+    }
+    function edit() {
+      const node = selected();
+      if (!node) return;
+      info.innerHTML = '<form id="edit-form"><div class="rs-kicker">编辑整理 / EDIT</div><h2>原文与来源会保留</h2><label>标题<input name="title" maxlength="200" required></label><label>整理后的内容<textarea name="body" maxlength="12000" required></textarea></label><div class="live-controls"><button type="submit">保存</button><button id="cancel-edit" type="button">取消</button></div></form>';
+      const form = info.querySelector('form');
+      form.elements.title.value = node.title;
+      form.elements.body.value = node.body;
+      info.querySelector('#cancel-edit').addEventListener('click', detail);
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        await mutate('revise_reading_node', { node_id: node.id, title: form.elements.title.value, body: form.elements.body.value, status: node.status });
+      });
+    }
+
+    function draw() {
+      svg.innerHTML = '';
+      map.querySelectorAll('.rs-node, .rs-edge, .empty').forEach(element => element.remove());
+      const node = selected();
+      if (!node) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = demoMode ? '演示图谱暂无节点。' : ready ? '这里还没有保存的思考。继续阅读讨论，地图会从第一条记录开始。' : '请从已连接的插件中打开地图，以读取真实知识库。';
+        map.appendChild(empty);
+        return;
+      }
+      const width = map.clientWidth;
+      const mobile = width < 600;
+      const visibleEdges = edgesFor(node.id).filter(edge => {
+        const source = nodeById(edge.source), target = nodeById(edge.target);
+        return node.kind === 'book' ? source?.kind !== 'book' || target?.kind !== 'book' : source?.kind !== 'book' && target?.kind !== 'book';
+      });
+      const neighborIds = [...new Set(visibleEdges.map(edge => edge.source === node.id ? edge.target : edge.source))].slice(0, 6);
+      const height = mobile ? Math.max(750, 350 + Math.ceil(neighborIds.length / 2) * 190) : Math.max(620, neighborIds.length > 4 ? 760 : 650);
+      map.style.height = `${height}px`;
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      const positions = { [node.id]: [width * .5, mobile ? height * .245 : height * .51] };
+      const desktopSlots = [[.27,.235],[.73,.235],[.27,.78],[.73,.78],[.5,.11],[.5,.9]];
+      const mobileSlots = [[.25,.56],[.75,.56],[.25,.83],[.75,.83],[.25,.97],[.75,.97]];
+      neighborIds.forEach((id, index) => {
+        const [x, y] = (mobile ? mobileSlots : desktopSlots)[index];
+        positions[id] = [width * x, height * y];
+      });
+      const renderEdges = visibleEdges.filter(edge => positions[edge.source] && positions[edge.target]);
+      for (const edge of renderEdges) {
+        const from = positions[edge.source], to = positions[edge.target];
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const bendY = (from[1] + to[1]) / 2;
+        path.setAttribute('d', `M ${from[0]} ${from[1]} C ${from[0]} ${bendY}, ${to[0]} ${bendY}, ${to[0]} ${to[1]}`);
+        svg.appendChild(path);
+        const button = document.createElement('button');
+        button.className = 'rs-edge';
+        button.type = 'button';
+        button.textContent = relations[edge.relation] || '关联';
+        button.setAttribute('aria-label', `查看关联依据：${button.textContent}`);
+        button.style.left = `${(from[0] + to[0]) / 2}px`;
+        button.style.top = `${(from[1] + to[1]) / 2}px`;
+        button.addEventListener('click', () => edgeDetail(edge));
+        map.appendChild(button);
+      }
+      const ids = [node.id, ...neighborIds];
+      for (const id of ids) {
+        const item = nodeById(id);
+        if (!item) continue;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `rs-node${id === node.id ? ' rs-core' : ''}`;
+        button.dataset.kind = item.kind;
+        button.setAttribute('aria-pressed', String(id === node.id));
+        button.setAttribute('aria-label', `${labels[item.kind] || '节点'}：${item.title}`);
+        const totalLinks = edgesFor(item.id).filter(edge => {
+          const source = nodeById(edge.source), target = nodeById(edge.target);
+          return item.kind === 'book' ? source?.kind !== 'book' || target?.kind !== 'book' : source?.kind !== 'book' && target?.kind !== 'book';
+        }).length;
+        button.innerHTML = `<span class="rs-node-mark" aria-hidden="true"></span><small>${esc(labels[item.kind] || '节点')}</small><span>${esc(item.title)}</span>${id === node.id ? `<span class="rs-core-count">${totalLinks} 条关联</span>` : ''}`;
+        button.style.left = `${positions[id][0]}px`;
+        button.style.top = `${positions[id][1]}px`;
+        button.addEventListener('click', () => choose(id));
+        map.appendChild(button);
+      }
+    }
+    function render() {
+      renderTopics();
+      renderShelf();
+      const node = selected();
+      root.querySelector('#map-title').textContent = node?.title || '思考正在这里相遇';
+      root.querySelector('#map-description').textContent = topic ? `围绕「${topic}」展开可以追溯的想法与关联。` : '围绕一段阅读，留下可追溯的想法与关联。';
+      const list = root.querySelector('.rs-list');
+      list.hidden = !listMode;
+      map.hidden = listMode;
+      list.innerHTML = filtered().filter(item => item.kind !== 'book').map(item => `<button type="button" data-note="${esc(item.id)}"><small>${esc(labels[item.kind] || '节点')} · ${esc(authors[item.attribution] || '')}</small>${esc(item.title)}</button>`).join('');
+      list.querySelectorAll('[data-note]').forEach(button => button.addEventListener('click', () => choose(button.dataset.note)));
+      root.querySelector('#view-toggle').textContent = listMode ? '关系地图' : '节点列表';
+      root.querySelector('#connection-state').textContent = demoMode ? '虚构演示 · 未连接真实库' : ready ? '已连接' : '正在连接知识库…';
+      root.querySelector('#revision-state').textContent = demoMode ? 'FICTIONAL DATA · UI CONCEPT' : graph.revision >= 0 ? `已读取存储 · 修订 ${graph.revision}` : '尚未连接存储';
+      root.querySelector('#demo-badge').hidden = !demoMode;
+      root.querySelector('#undo').hidden = demoMode || !graph.recent_changes?.[0] || graph.recent_changes[0].action === 'undo';
+      root.querySelector('#refresh').hidden = demoMode;
+      root.querySelector('#retry').hidden = demoMode || !pendingMutation;
+      const latest = graph.recent_changes?.[0];
+      root.querySelector('.rs-update span:last-child').textContent = demoMode ? '虚构演示数据 · 不会写入个人知识库' : latest ? `最近更新 · ${latest.summary?.added_nodes?.length || 0} 条新增 · ${new Date(latest.created_at).toLocaleString()}` : '等待下一次阅读思考';
+      detail();
+      if (!listMode) draw();
+    }
+
+    root.querySelector('#view-toggle').addEventListener('click', () => { listMode = !listMode; render(); });
+    root.querySelector('#refresh').addEventListener('click', () => call('get_knowledge_map', {}).catch(issue => error(issue.message)));
+    root.querySelector('#undo').addEventListener('click', () => {
+      const latest = graph.recent_changes?.[0];
+      if (latest) mutate('undo_reading_change', { change_id: latest.id });
+    });
+    root.querySelector('#retry').addEventListener('click', () => {
+      if (pendingMutation) mutate(pendingMutation.name, pendingMutation.args, true);
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(() => { if (!listMode) draw(); }).observe(map);
+    else window.addEventListener('resize', () => { if (!listMode) draw(); });
+
+    if (demoMode) {
+      render();
+    } else {
+      (async () => {
+        try {
+          await request('ui/initialize', { appInfo: { name: 'reading-between', version: '0.2.0' }, appCapabilities: {}, protocolVersion: '2026-01-26' });
+          ready = true;
+          notify('ui/notifications/initialized', {});
+          await call('get_knowledge_map', {});
+        } catch (issue) {
+          root.querySelector('#connection-state').textContent = '未连接';
+          error(issue.message);
+        }
+      })();
+    }
+  })();
+  </script>
+</body>
+</html>
