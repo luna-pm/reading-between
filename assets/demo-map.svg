@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="760" viewBox="0 0 1240 760" role="img" aria-labelledby="title desc">
+  <title id="title">阅读之间知识地图示意图</title>
+  <desc id="desc">基于虚构阅读示例构建的知识地图，展示一个中心概念与洞察、方法、开放问题和例子之间的联系。</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M 28 0 L 0 0 0 28" fill="none" stroke="#465047" stroke-width="1"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#111613" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1240" height="760" rx="24" fill="#202622"/>
+  <rect x="1" y="1" width="1238" height="758" rx="23" fill="none" stroke="#697064" stroke-width="2"/>
+  <rect x="0" y="0" width="1240" height="82" rx="24" fill="#262d29"/>
+  <path d="M0 82H1240" stroke="#72786c"/>
+  <rect x="28" y="25" width="32" height="32" rx="3" fill="#ef8859"/>
+  <rect x="38" y="35" width="12" height="12" fill="#f8eee3"/>
+  <text x="77" y="53" fill="#eeeade" font-family="Arial, sans-serif" font-size="27" font-weight="600">阅读之间</text>
+  <text x="234" y="50" fill="#a9aea1" font-family="monospace" font-size="12" letter-spacing="2">READING / THINKING / CONNECTIONS</text>
+  <text x="1175" y="49" text-anchor="end" fill="#d8c455" font-family="monospace" font-size="12" letter-spacing="1">FICTIONAL DEMO</text>
+
+  <rect x="0" y="82" width="176" height="678" fill="#292f2b"/>
+  <path d="M176 82V760" stroke="#596157"/>
+  <text x="25" y="119" fill="#a8afa2" font-family="monospace" font-size="12" letter-spacing="1">主题 / CHANNELS</text>
+  <g font-family="Arial, sans-serif" font-size="15" fill="#e4e4d9">
+    <rect x="17" y="145" width="142" height="64" rx="7" fill="#3b453b" stroke="#ef8859" stroke-width="2"/>
+    <circle cx="39" cy="177" r="7" fill="#83b5cb"/><text x="58" y="182">全部思考</text>
+    <circle cx="39" cy="245" r="7" fill="#83b5cb"/><text x="58" y="250">文学阅读</text>
+    <circle cx="39" cy="313" r="7" fill="#d4be55"/><text x="58" y="318">物品与记忆</text>
+    <circle cx="39" cy="381" r="7" fill="#8bb79e"/><text x="58" y="386">阅读方法</text>
+  </g>
+  <path d="M20 423H154" stroke="#596157"/>
+  <text x="25" y="457" fill="#a8afa2" font-family="monospace" font-size="11" letter-spacing="1">演示书目</text>
+  <rect x="27" y="478" width="72" height="92" rx="3" fill="#d4be55"/>
+  <path d="M35 478V570" stroke="#f0dc7a" stroke-width="5"/>
+  <text x="63" y="515" text-anchor="middle" fill="#252b25" font-family="Arial, sans-serif" font-size="12">雨天的</text>
+  <text x="63" y="535" text-anchor="middle" fill="#252b25" font-family="Arial, sans-serif" font-size="12">旧书店</text>
+  <text x="25" y="602" fill="#a8afa2" font-family="Arial, sans-serif" font-size="12">虚构作品</text>
+
+  <rect x="196" y="104" width="718" height="624" rx="16" fill="url(#grid)" stroke="#586157" stroke-width="2"/>
+  <text x="222" y="137" fill="#a8afa2" font-family="monospace" font-size="12" letter-spacing="1">知识地图 / CONNECTION MAP</text>
+  <text x="222" y="178" fill="#eeeade" font-family="Arial, sans-serif" font-size="27">物品与记忆</text>
+  <text x="222" y="205" fill="#a8afa2" font-family="Arial, sans-serif" font-size="14">围绕一段阅读，留下可追溯的想法和关联。</text>
+
+  <g fill="none" stroke="#8e9688" stroke-width="2">
+    <path d="M485 335 C463 316 439 302 421 287"/>
+    <path d="M665 335 C690 313 714 301 735 287"/>
+    <path d="M485 454 C463 479 439 495 421 513"/>
+    <path d="M665 454 C690 479 714 495 735 513"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#c2c5b9" text-anchor="middle">
+    <rect x="425" y="302" width="67" height="24" rx="5" fill="#202622"/><text x="458" y="319">引出洞察</text>
+    <rect x="666" y="302" width="67" height="24" rx="5" fill="#202622"/><text x="700" y="319">提炼方法</text>
+    <rect x="425" y="466" width="67" height="24" rx="5" fill="#202622"/><text x="458" y="483">继续追问</text>
+    <rect x="666" y="466" width="67" height="24" rx="5" fill="#202622"/><text x="700" y="483">具体例子</text>
+  </g>
+
+  <g filter="url(#shadow)" font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="469" y="335" width="212" height="119" rx="12" fill="#d4be55"/>
+    <text x="575" y="369" fill="#373a2d" font-size="13">核心概念</text>
+    <text x="575" y="407" fill="#252b25" font-size="21" font-weight="600">物品与记忆</text>
+    <text x="575" y="432" fill="#494b3f" font-size="12">4 条关联</text>
+
+    <circle cx="393" cy="260" r="23" fill="#83b5cb"/><circle cx="393" cy="260" r="7" fill="#26302e"/>
+    <text x="393" y="302" fill="#a8afa2" font-size="12">洞察</text>
+    <text x="393" y="324" fill="#eeeade" font-size="15">坏收音机承载</text>
+    <text x="393" y="345" fill="#eeeade" font-size="15">家庭记忆</text>
+
+    <path d="M735 237L759 280H711Z" fill="#d4be55"/>
+    <text x="735" y="302" fill="#a8afa2" font-size="12">方法</text>
+    <text x="735" y="324" fill="#eeeade" font-size="15">从物件细节</text>
+    <text x="735" y="345" fill="#eeeade" font-size="15">理解人物关系</text>
+
+    <circle cx="393" cy="542" r="23" fill="#83b5cb"/><circle cx="393" cy="542" r="7" fill="#26302e"/>
+    <text x="393" y="584" fill="#a8afa2" font-size="12">开放问题</text>
+    <text x="393" y="606" fill="#eeeade" font-size="14">人为什么会带走</text>
+    <text x="393" y="627" fill="#eeeade" font-size="14">已经损坏的物品？</text>
+
+    <circle cx="735" cy="542" r="23" fill="#83b5cb"/><circle cx="735" cy="542" r="7" fill="#26302e"/>
+    <text x="735" y="584" fill="#a8afa2" font-size="12">具体例子</text>
+    <text x="735" y="606" fill="#eeeade" font-size="14">搬家时坚持带走</text>
+    <text x="735" y="627" fill="#eeeade" font-size="14">那台坏收音机</text>
+  </g>
+
+  <rect x="936" y="104" width="280" height="624" rx="15" fill="#2b322e" stroke="#586157"/>
+  <text x="964" y="139" fill="#a8afa2" font-family="monospace" font-size="12" letter-spacing="1">节点详情 / DETAIL</text>
+  <rect x="964" y="164" width="76" height="25" rx="5" fill="#414b3c"/>
+  <text x="1002" y="181" text-anchor="middle" fill="#d4be55" font-family="Arial, sans-serif" font-size="12">核心概念</text>
+  <text x="964" y="229" fill="#eeeade" font-family="Arial, sans-serif" font-size="22">物品与记忆</text>
+  <path d="M964 250H1187" stroke="#596157"/>
+  <text x="964" y="283" fill="#a8afa2" font-family="monospace" font-size="12">原文摘录</text>
+  <text x="964" y="316" fill="#d9dbd0" font-family="Arial, sans-serif" font-size="14">“搬家时坚持带走那台</text>
+  <text x="964" y="340" fill="#d9dbd0" font-family="Arial, sans-serif" font-size="14">坏收音机。”</text>
+  <path d="M964 365H1187" stroke="#596157"/>
+  <text x="964" y="399" fill="#a8afa2" font-family="monospace" font-size="12">来源</text>
+  <text x="964" y="426" fill="#eeeade" font-family="Arial, sans-serif" font-size="14">《雨天的旧书店》</text>
+  <text x="964" y="449" fill="#a8afa2" font-family="Arial, sans-serif" font-size="12">虚构演示作品</text>
+  <path d="M964 476H1187" stroke="#596157"/>
+  <text x="964" y="510" fill="#a8afa2" font-family="monospace" font-size="12">相关节点</text>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#d9dbd0">
+    <circle cx="974" cy="543" r="5" fill="#83b5cb"/><text x="990" y="548">坏收音机承载家庭记忆</text>
+    <circle cx="974" cy="579" r="5" fill="#d4be55"/><text x="990" y="584">从物件细节理解人物关系</text>
+    <circle cx="974" cy="615" r="5" fill="#83b5cb"/><text x="990" y="620">人为什么会带走旧物？</text>
+  </g>
+  <text x="964" y="692" fill="#8e9688" font-family="monospace" font-size="11" letter-spacing="1">FICTIONAL DATA · UI CONCEPT</text>
+</svg>
