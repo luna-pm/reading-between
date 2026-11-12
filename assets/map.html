@@ -8,7 +8,7 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #202722;
+      --bg: #202622;
       --sidebar: #252d29;
       --panel: #2a332f;
       --panel-raised: #303a34;
@@ -159,7 +159,9 @@
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 25px;
-      background-color: #202823;
+      background-color: #202622;
+      background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 38px 38px;
     }
     .rs-main-head { padding: 29px 35px 0; }
     .rs-main-head h1 { margin: 8px 0 5px; font-size: clamp(25px, 2.2vw, 38px); line-height: 1.3; font-weight: 650; letter-spacing: -.025em; }
@@ -180,8 +182,7 @@
       min-height: 640px;
       margin: 0 0 0;
       overflow: hidden;
-      background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-      background-size: 38px 38px;
+      background-image: none;
       isolation: isolate;
     }
     .rs-map::before, .rs-map::after { content: ""; position: absolute; z-index: 0; top: 18px; bottom: 18px; width: 13px; opacity: .65; pointer-events: none; background: repeating-linear-gradient(to bottom, var(--muted) 0 1px, transparent 1px 10px); }
@@ -342,7 +343,7 @@
       .rs-desc { font-size: 12px; }
       .rs-toolbar { min-height: 40px; margin-top: 6px; }
       .rs-toolbar button { min-height: 34px; padding: 5px 8px; font-size: 10px; }
-      .rs-map { min-height: 750px; background-size: 28px 28px; }
+      .rs-map { min-height: 750px; }
       .rs-node { width: 132px; gap: 5px; padding: 6px 5px; font-size: 12px; }
       .rs-node small { font-size: 10px; }
       .rs-node-mark { width: 40px; height: 40px; }
@@ -425,19 +426,14 @@
       nodes: [
         {
           id: 'objects-memory', title: '物品与记忆', body: '旧物在故事里既承载日常功能，也保存人与过往之间的关系。读到物品时，可以继续追问：它属于谁、为何留下、作者为什么在此刻写到它？',
-          kind: 'concept', attribution: 'user', status: 'accepted', quote: '搬家时，坚持带走那台早已坏掉的收音机。', quote_attribution: 'external',
+          kind: 'concept', attribution: 'user', status: 'accepted', quote: '搬家时坚持带走那台坏收音机。', quote_attribution: 'external',
           topics: ['文学阅读', '物品与记忆'], archived: false,
-          sources: [{ label: '《雨天的旧书店》· 第四章（虚构演示摘录）', url: null, message_id: 'demo-fictional-source', attribution: 'external', quote: '搬家时，坚持带走那台早已坏掉的收音机。', quote_attribution: 'external' }]
+          sources: [{ label: '《雨天的旧书店》· 虚构演示作品', url: null, message_id: 'demo-fictional-source', attribution: 'external', quote: '搬家时坚持带走那台坏收音机。', quote_attribution: 'external' }]
         },
         {
           id: 'rainy-bookstore', title: '《雨天的旧书店》', body: '作者：沈禾（虚构）\n虚构演示作品 · 2024',
           kind: 'book', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false,
           sources: [{ label: '虚构演示书目', url: null, message_id: 'demo-fictional-book', attribution: 'external', quote: '', quote_attribution: 'external' }]
-        },
-        {
-          id: 'glass-sea-letters', title: '《玻璃海边的信》', body: '作者：周千屿（虚构）\n虚构演示作品 · 2023',
-          kind: 'book', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '阅读方法'], archived: false,
-          sources: [{ label: '虚构演示书目', url: null, message_id: 'demo-fictional-book-2', attribution: 'external', quote: '', quote_attribution: 'external' }]
         },
         {
           id: 'radio-memory', title: '坏收音机承载家庭记忆', body: '人物坚持带走已经失去功能的收音机，说明它的价值来自共同生活的记忆。',
@@ -448,17 +444,13 @@
           kind: 'method', attribution: 'user', status: 'accepted', quote: '', topics: ['文学阅读', '阅读方法'], archived: false, sources: []
         },
         {
-          id: 'why-keep', title: '人为什么会带走旧物？', body: '开放问题：留下物品是在保存记忆、维持身份，还是抵抗一段关系的结束？',
+          id: 'why-keep', title: '人为什么会带走已经损坏的物品？', body: '开放问题：留下物品是在保存记忆、维持身份，还是抵抗一段关系的结束？',
           kind: 'question', attribution: 'user', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false, sources: []
         },
         {
-          id: 'moving-example', title: '搬家时带走那台收音机', body: '具体场景：主人公搬家时没有带走贵重家具，却坚持带走已坏掉的收音机。',
+          id: 'moving-example', title: '搬家时坚持带走那台坏收音机', body: '具体场景：主人公搬家时没有带走贵重家具，却坚持带走已坏掉的收音机。',
           kind: 'example', attribution: 'external', status: 'open', quote: '', topics: ['文学阅读', '物品与记忆'], archived: false, sources: []
         },
-        {
-          id: 'letter-memory', title: '一封没有寄出的信', body: '信件在故事里成为无法当面说出的话的容器。',
-          kind: 'insight', attribution: 'user', status: 'proposed', quote: '', topics: ['文学阅读', '阅读方法'], archived: false, sources: []
-        }
       ],
       edges: [
         { id: 'objects-radio', source: 'objects-memory', target: 'radio-memory', relation: 'extends', reason: '坏掉的收音机说明物品的意义会超出使用功能，成为共同生活的记忆载体。', attribution: 'user' },
@@ -466,8 +458,7 @@
         { id: 'objects-question', source: 'objects-memory', target: 'why-keep', relation: 'origin', reason: '从“为什么坚持带走”这个细节继续追问人物动机。', attribution: 'user' },
         { id: 'objects-example', source: 'objects-memory', target: 'moving-example', relation: 'example', reason: '小说中的搬家场景为这个思考提供了具体例子。', attribution: 'external' },
         { id: 'book-objects', source: 'rainy-bookstore', target: 'objects-memory', relation: 'origin', reason: '这段思考来自虚构作品《雨天的旧书店》。', attribution: 'external' },
-        { id: 'book-radio', source: 'rainy-bookstore', target: 'radio-memory', relation: 'origin', reason: '收音机细节出现在《雨天的旧书店》第四章。', attribution: 'external' },
-        { id: 'book-letter', source: 'glass-sea-letters', target: 'letter-memory', relation: 'origin', reason: '这条演示思考来自虚构作品《玻璃海边的信》。', attribution: 'external' }
+        { id: 'book-radio', source: 'rainy-bookstore', target: 'radio-memory', relation: 'origin', reason: '收音机细节来自《雨天的旧书店》，这是虚构演示作品。', attribution: 'external' }
       ]
     };
 
@@ -491,6 +482,8 @@
     const relations = { origin: '来源', analogy: '类比', supports: '支持', extends: '延伸', challenges: '质疑', revises: '修正', example: '具体例子', applies: '应用', part_of: '组成' };
     const authors = { user: '你的表达', ai: 'AI 整理', external: '书籍原文' };
     const states = { open: '开放中', proposed: '待讨论', accepted: '已认可', verified: '外部核验' };
+    const demoRelationLabels = { 'objects-radio': '引出洞察', 'objects-layers': '提炼方法', 'objects-question': '继续追问', 'objects-example': '具体例子' };
+    const relationLabel = edge => demoMode ? (demoRelationLabels[edge.id] || relations[edge.relation] || '关联') : (relations[edge.relation] || '关联');
     const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
     const allNodes = () => graph.nodes.filter(node => !node.archived);
     const nodeById = id => graph.nodes.find(node => node.id === id && !node.archived);
@@ -586,11 +579,11 @@
 
     function renderTopics() {
       const topics = [...new Set(allNodes().filter(node => node.kind !== 'book').flatMap(node => node.topics || []))];
-      const colors = ['var(--blue)', 'var(--yellow)', 'var(--green)', 'var(--orange)'];
+      const colors = { '': 'var(--blue)', '文学阅读': 'var(--blue)', '物品与记忆': 'var(--yellow)', '阅读方法': 'var(--green)' };
       const nav = root.querySelector('.rs-topics');
       nav.innerHTML = ['', ...topics].map((item, index) => {
         const label = item || '全部思考';
-        return `<button class="rs-topic" type="button" data-topic="${esc(item)}" aria-pressed="${String(item === topic)}" style="--topic-color:${colors[index % colors.length]}"><span class="rs-topic-dot" aria-hidden="true"></span><span>${esc(label)}</span></button>`;
+        return `<button class="rs-topic" type="button" data-topic="${esc(item)}" aria-pressed="${String(item === topic)}" style="--topic-color:${colors[item] || 'var(--orange)'}"><span class="rs-topic-dot" aria-hidden="true"></span><span>${esc(label)}</span></button>`;
       }).join('');
       nav.querySelectorAll('[data-topic]').forEach(button => button.addEventListener('click', () => {
         topic = button.dataset.topic;
@@ -631,13 +624,13 @@
       const sources = node.sources || [];
       const isCore = linked.length > 2;
       const quote = node.quote ? `<section class="rs-detail-block"><p class="rs-detail-label">原文摘录 / ORIGINAL EXCERPT</p><blockquote>“${esc(node.quote)}”</blockquote><div class="rs-quote-credit">${esc(authors[node.quote_attribution || node.attribution] || '来源未标注')}</div></section>` : '';
-      const summary = node.body ? `<p class="rs-summary">${esc(node.body)}</p>` : '';
+      const summary = node.body && !demoMode ? `<p class="rs-summary">${esc(node.body)}</p>` : '';
       const bookCards = books.map(book => {
         const source = sources.find(item => item.label?.includes(book.title.replace(/[《》]/g, '')) || item.label?.includes(book.title));
         return `<div class="rs-source-card"><div class="rs-source-mini-cover">${esc(book.title.replace(/^《|》$/g, ''))}</div><div><div class="rs-source-title">${esc(book.title)}</div><div class="rs-source-meta">${esc(bookMeta(book) || sourceLabel(source) || '书籍来源')}</div>${source?.url ? `<a class="rs-source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">查看来源 ↗</a>` : ''}</div></div>`;
       }).join('');
       const sourceFallback = sources.length ? sources.map(source => `<p class="rs-source-meta">${esc(sourceLabel(source))}${source.attribution ? ` · ${esc(authors[source.attribution] || source.attribution)}` : ''}</p>${source.url ? `<a class="rs-source-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">查看原对话或资料 ↗</a>` : ''}`).join('') : '<p class="rs-source-meta">这条节点还没有记录书籍来源。</p>';
-      const related = linked.length ? linked.map(({ edge, other }) => `<button type="button" data-to="${esc(other.id)}"><span class="rs-related-dot" data-kind="${esc(other.kind)}" aria-hidden="true"></span><span><span class="rs-related-relation">${esc(relations[edge.relation] || '关联')}</span>${esc(other.title)}</span></button>`).join('') : '<p class="rs-source-meta">暂时没有直接关联的节点。</p>';
+      const related = linked.length ? linked.map(({ edge, other }) => `<button type="button" data-to="${esc(other.id)}"><span class="rs-related-dot" data-kind="${esc(other.kind)}" aria-hidden="true"></span><span>${esc(other.title)}</span></button>`).join('') : '<p class="rs-source-meta">暂时没有直接关联的节点。</p>';
       const editControls = ready && !demoMode ? '<div class="live-controls"><button type="button" id="edit-node">编辑整理</button><button type="button" id="archive-node">移出地图</button></div>' : '';
       info.innerHTML = `<div class="rs-kicker">节点详情 / DETAIL</div><div class="rs-type-pill">${esc(labels[node.kind] || '思考节点')}</div><h2>${esc(node.title)}</h2>${quote}${books.length || sources.length ? `<section class="rs-detail-block"><p class="rs-detail-label">书籍来源 / BOOK SOURCE</p>${books.length ? bookCards : sourceFallback}</section>` : ''}${summary}${editControls}<section class="rs-detail-block"><p class="rs-detail-label">相关节点 / RELATED NODES</p><div class="rs-related">${related}</div></section><div class="rs-info-foot">${demoMode ? 'FICTIONAL DATA · UI CONCEPT' : `${esc(authors[node.attribution] || '来源未标注')} · ${esc(states[node.status] || '状态未标注')}`}</div>`;
       info.querySelectorAll('[data-to]').forEach(button => button.addEventListener('click', () => choose(button.dataset.to)));
@@ -649,7 +642,7 @@
     function edgeDetail(edge) {
       if (!edge) return;
       const start = nodeById(edge.source), end = nodeById(edge.target);
-      info.innerHTML = `<div class="rs-kicker">关联依据 / ${esc(relations[edge.relation] || '关联')}</div><div class="rs-type-pill">${esc(relations[edge.relation] || '关联')}</div><h2>${esc(start?.title)} → ${esc(end?.title)}</h2><p class="rs-summary">${esc(edge.reason)}</p><section class="rs-detail-block"><p class="rs-detail-label">沿着关联继续 / KEEP READING</p><div class="rs-related"><button type="button" data-to="${esc(edge.source)}">${esc(start?.title)} ↗</button><button type="button" data-to="${esc(edge.target)}">${esc(end?.title)} ↗</button></div></section><div class="rs-info-foot">${demoMode ? 'FICTIONAL DATA · UI CONCEPT' : esc(authors[edge.attribution] || '来源未标注')}</div>`;
+      info.innerHTML = `<div class="rs-kicker">关联依据 / LINK</div><div class="rs-type-pill">${esc(relationLabel(edge))}</div><h2>${esc(start?.title)} → ${esc(end?.title)}</h2><p class="rs-summary">${esc(edge.reason)}</p><section class="rs-detail-block"><p class="rs-detail-label">沿着关联继续 / KEEP READING</p><div class="rs-related"><button type="button" data-to="${esc(edge.source)}">${esc(start?.title)} ↗</button><button type="button" data-to="${esc(edge.target)}">${esc(end?.title)} ↗</button></div></section><div class="rs-info-foot">${demoMode ? 'FICTIONAL DATA · UI CONCEPT' : esc(authors[edge.attribution] || '来源未标注')}</div>`;
       info.querySelectorAll('[data-to]').forEach(button => button.addEventListener('click', () => choose(button.dataset.to)));
     }
     function edit() {
@@ -704,7 +697,7 @@
         const button = document.createElement('button');
         button.className = 'rs-edge';
         button.type = 'button';
-        button.textContent = relations[edge.relation] || '关联';
+        button.textContent = relationLabel(edge);
         button.setAttribute('aria-label', `查看关联依据：${button.textContent}`);
         button.style.left = `${(from[0] + to[0]) / 2}px`;
         button.style.top = `${(from[1] + to[1]) / 2}px`;
@@ -737,13 +730,17 @@
       renderShelf();
       const node = selected();
       root.querySelector('#map-title').textContent = node?.title || '思考正在这里相遇';
-      root.querySelector('#map-description').textContent = topic ? `围绕「${topic}」展开可以追溯的想法与关联。` : '围绕一段阅读，留下可追溯的想法与关联。';
+      root.querySelector('#map-description').textContent = topic ? `围绕「${topic}」展开可以追溯的想法与关联。` : '围绕一段阅读，留下可追溯的想法和关联。';
       const list = root.querySelector('.rs-list');
       list.hidden = !listMode;
       map.hidden = listMode;
       list.innerHTML = filtered().filter(item => item.kind !== 'book').map(item => `<button type="button" data-note="${esc(item.id)}"><small>${esc(labels[item.kind] || '节点')} · ${esc(authors[item.attribution] || '')}</small>${esc(item.title)}</button>`).join('');
       list.querySelectorAll('[data-note]').forEach(button => button.addEventListener('click', () => choose(button.dataset.note)));
       root.querySelector('#view-toggle').textContent = listMode ? '关系地图' : '节点列表';
+      root.querySelector('.rs-toolbar').hidden = demoMode;
+      root.querySelector('.rs-update').hidden = demoMode;
+      root.querySelector('.rs-side-foot').hidden = demoMode;
+      root.querySelector('.rs-footer').hidden = demoMode;
       root.querySelector('#connection-state').textContent = demoMode ? '虚构演示 · 未连接真实库' : ready ? '已连接' : '正在连接知识库…';
       root.querySelector('#revision-state').textContent = demoMode ? 'FICTIONAL DATA · UI CONCEPT' : graph.revision >= 0 ? `已读取存储 · 修订 ${graph.revision}` : '尚未连接存储';
       root.querySelector('#demo-badge').hidden = !demoMode;
